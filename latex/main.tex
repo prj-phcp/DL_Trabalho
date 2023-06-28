@@ -45,11 +45,49 @@ system identification, scikit-learn, neural network, oil and gas, production for
 
 % INTRODUCAO
 %\color{black}
-Well monitoring and production rates estimations compose the reservoir management activity and have a major role in the oil and gas industry. Being able to accurately forecast the production of a well or an oilfield is a constant need on the oil and gas industry in order to assess the economic value of its assets, calculate royalties to be paid and perform an effective reservoir management strategy that will increase the value extracted from the oil field \cite{alakeely2022simulating}.
+Well monitoring and production rates estimations compose the reservoir management activity 
+and have a major role in the oil and gas industry. Being able to accurately forecast the 
+production of a well or an oilfield is a constant need on the oil and gas industry in order 
+to assess the economic value of its assets, calculate royalties to be paid and perform an 
+effective reservoir management strategy that will increase the value extracted from the oil 
+field \cite{alakeely2022simulating}.
 
-In most offshore production facilities, the separation of the three phases (oil, gas and water) of the wells is performed only for the total production of the unit, as the space available for the separation vessels is limited. A second separation system is usually available to separate fluids of a single well in order to have an accurate measurement of its three phases flow rates. This vessel is called test separator and this operation of measuring flow rates is known as well test. As the separator test measures are obtained for a single well at a time, most part of the time the well flow rates are not being continuously acquired. The full historic production flow rates for each of the connected wells, is then, uncertain as it is usualy reported as an apportionment of the total production. An alternative to the traditional well test based apportionment is the use of multi phase flow meters, however, since multi phase flow is complex, turbulent, and chaotic, the acquisition of accurate, reliable, and repeatable rate measurements can be a challenge \cite{Okotie2016}.
+In most offshore production facilities, the separation of the three phases (oil, gas and water)
+of the wells is performed only for the total production of the unit, as the space available 
+for the separation vessels is limited. A second separation system is usually available to 
+separate fluids of a single well in order to have an accurate measurement of its three phases 
+flow rates. This vessel is called test separator and this operation of measuring flow rates is 
+known as well test. As the separator test measures are obtained for a single well at a time, 
+most part of the time the well flow rates are not being continuously acquired. The full 
+historic production flow rates for each of the connected wells, is then, uncertain as it 
+is usualy reported as an apportionment of the total production. An alternative to the 
+traditional well test based apportionment is the use of multi phase flow meters, however, 
+since multi phase flow is complex, turbulent, and chaotic, the acquisition of accurate, 
+reliable, and repeatable rate measurements can be a challenge \cite{Okotie2016}.
 
-Due to the challenges associated to the determination and forecasting of production rates per well, production predictions are normally performed by using simulation models based on first principles. These models are built and maintained by qualified engineers by using pressure and temperature data taken from sensors positioned in key points of the well, some of which are displayed schematically in figure \ref{fig:pressureSensors}. Adjusting the reservoir model in order to correctly match the actual dynamic historic behaviour is the process known as history match \cite{alakeely2022simulating}. Li et al. \cite{Li2019} comment that this approach, due to some simplified assumptions, may generate uncertain models and also cites the pressure dependency of the flow rate as input, an already uncertain variable, as a major limitation. Cao et al. \cite{CaoQ2016} also comments that, specially for unconventional resources, a conventional characterization of the field may not be feasible thanks to ultra-tight shale formations for some unconventional fields, uncertainties in the geological properties and heterogeneous rock formations, being the last two challenges commonly found even in more conventional assets. The dependency of well sensors for the history match can also be a challenge, since there is always a risk of losing some measurements. As an example, the donwhole pressure is one of the most important variable to provide useful information for management and oil recovery of the oil field \cite{camponogara2010automation} but the PDG sensor responsible for its measurement has a high failure rate. Those systems for measuring pressure and temperature historically exhibited a low reliability \cite{Gisbergen2001} and, in offshore wells, the replacement of such equipment once it's damaged is not a common operation due to the high costs associated with the workover operation and high environmental risks \cite{Freitas2021}. In that case, reservoir management becomes more challenging and lack of information may hinder decisions that depend on long-term predictions. 
+Due to the challenges associated to the determination and forecasting of production rates per 
+well, production predictions are normally performed by using simulation models based on first 
+principles. These models are built and maintained by qualified engineers by using pressure and 
+temperature data taken from sensors positioned in key points of the well, some of which are 
+displayed schematically in figure \ref{fig:pressureSensors}. Adjusting the reservoir model in 
+order to correctly match the actual dynamic historic behaviour is the process known as history 
+match \cite{alakeely2022simulating}. Li et al. \cite{Li2019} comment that this approach, due 
+to some simplified assumptions, may generate uncertain models and also cites the pressure 
+dependency of the flow rate as input, an already uncertain variable, as a major limitation. 
+Cao et al. \cite{CaoQ2016} also comments that, specially for unconventional resources, a 
+conventional characterization of the field may not be feasible thanks to ultra-tight shale 
+formations for some unconventional fields, uncertainties in the geological properties and 
+heterogeneous rock formations, being the last two challenges commonly found even in more 
+conventional assets. The dependency of well sensors for the history match can also be a 
+challenge, since there is always a risk of losing some measurements. As an example, the 
+donwhole pressure is one of the most important variable to provide useful information for 
+management and oil recovery of the oil field \cite{camponogara2010automation} but the PDG 
+sensor responsible for its measurement has a high failure rate. Those systems for measuring 
+pressure and temperature historically exhibited a low reliability \cite{Gisbergen2001} and, 
+in offshore wells, the replacement of such equipment once it's damaged is not a common 
+operation due to the high costs associated with the workover operation and high environmental 
+risks \cite{Freitas2021}. In that case, reservoir management becomes more challenging and lack 
+of information may hinder decisions that depend on long-term predictions. 
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=3.0in]{wellScheme.png}}
@@ -58,137 +96,92 @@ Due to the challenges associated to the determination and forecasting of product
 \end{figure}
 
 % LITERATURE REVIEW
-Reservoir management area has recently benefited from machine learning methods that emerged as powerful tools to address these key challenges \cite{alakeely2022simulating}, posing as an alternative to the conventional first principles approach. Many studies have addressed the problem of predicting well rates and reservoir monitoring by the use of artificial intelligence techniques such as machine learning methods. According to Alakeely et al. \cite{AlakeelyGA2022}, these models are powerful tools for tasks where the actual model between the input and output variables is not well defined or does not exist, and where forward modeling is well defined, but the inverse model is challenging. The difficulty in modeling the dynamic behaviour of those systems is that they present a wide range of operating conditions what makes the prediction task a challenging one \cite{Freitas2021} \cite{Apio2019}. This happens because the physical phenomena that happen in a certain time window on a well production history are not expected to be repeated over time as the water and gas fractions tend to rise and the pressure levels tend to monotonically decrease. These variables are responsible for changing the well behavior in several parameters, like productivity index, phase viscosities and densities. 
+Reservoir management area has recently benefited from machine learning methods that emerged as 
+powerful tools to address these key challenges \cite{alakeely2022simulating}, posing as an 
+alternative to the conventional first principles approach. Many studies have addressed the 
+problem of predicting well rates and reservoir monitoring by the use of artificial intelligence 
+techniques such as machine learning methods. According to Alakeely et al. \cite{AlakeelyGA2022}, these models are powerful tools for tasks where the actual model between the input and output variables is not well defined or does not exist, and where forward modeling is well defined, but the inverse model is challenging. The difficulty in modeling the dynamic behaviour of those systems is that they present a wide range of operating conditions what makes the prediction task a challenging one \cite{Freitas2021} \cite{Apio2019}. This happens because the physical phenomena that happen in a certain time window on a well production history are not expected to be repeated over time as the water and gas fractions tend to rise and the pressure levels tend to monotonically decrease. These variables are responsible for changing the well behavior in several parameters, like productivity index, phase viscosities and densities. 
 
-Alakeely and Horne \cite{Alakeely2021} proposed a Deep Learning method using surface measurements to predict well flow rates. Also in \cite{Alakeely2021}, autoencoders were used to generate additional inputs and the results were compared to classic Gilbert correlation methods. Cao et al. \cite{CaoQ2016} used a single-layer fully-connected neural network to predict the production rates of existing wells, but also tried o add information from the geologic contex in order to predict new wells.
+Alakeely and Horne \cite{Alakeely2021} proposed a Deep Learning method using surface measurements 
+to predict well flow rates. Also in \cite{Alakeely2021}, autoencoders were used to generate 
+additional inputs and the results were compared to classic Gilbert correlation methods. 
+Cao et al. \cite{CaoQ2016} used a single-layer fully-connected neural network to predict the 
+production rates of existing wells, but also tried o add information from the geologic contex 
+in order to predict new wells.
 
-As already mentioned, well pressure and temperature sensors, in case of fail, are unlikely to be replaced in a short period thanks to economical and environmental reasons. In that sense, soft sensors models emerge as an alternative to replace a sensors such as the PDG \cite{Aguirre2017}. A study on PDG soft sensors is provided by Aguirre et al. in \cite{Aguirre2017} using NARMAX, neural networks, committee machines, unscented Kalman filters and filter banks models. Aguirre et al. \cite{Aguirre2017} also show the key-problems in developing soft-sensors and reveal the strengths and weaknesses of each alternative, based on diverse oil wells considered. An application of Echo State Network to model well downhole and riser inlet pressure by using surface and subsea valves position as input variables is provided by Jourdanou et al. \cite{JORDANOU2019} where the data is generated by a flow simulator and the framework is then used for nonlinear model predictive control (NMPC) purposes. Li et al. \cite{Li2019} also modeled the downhole pressure with deep learning models, searching for the best architecture to represent short-term transients and long-term variations. %, but also using the rates as inputs.
+As already mentioned, well pressure and temperature sensors, in case of fail, are unlikely to 
+be replaced in a short period thanks to economical and environmental reasons. In that sense, 
+soft sensors models emerge as an alternative to replace a sensors such as the PDG 
+\cite{Aguirre2017}. A study on PDG soft sensors is provided by Aguirre et al. in 
+\cite{Aguirre2017} using NARMAX, neural networks, committee machines, unscented Kalman filters 
+and filter banks models. Aguirre et al. \cite{Aguirre2017} also show the key-problems in 
+developing soft-sensors and reveal the strengths and weaknesses of each alternative, based on 
+diverse oil wells considered. An application of Echo State Network to model well downhole and 
+riser inlet pressure by using surface and subsea valves position as input variables is 
+provided by Jourdanou et al. \cite{JORDANOU2019} where the data is generated by a flow 
+simulator and the framework is then used for nonlinear model predictive control (NMPC) 
+purposes. Li et al. \cite{Li2019} also modeled the downhole pressure with deep learning 
+models, searching for the best architecture to represent short-term transients and long-term 
+variations. %, but also using the rates as inputs.
 
-A black-box identification procedure consists of using only data set available input and output information. Freitas et al. \cite{Freitas2021} propose the use of steady-state response as an additional information to improve the quality of the model predictions, creating gray-box models that outperformed the black-box ones in the cases studied by adding more physical information of the first principles. Similarly, Apio et al. \cite{Apio2019} propose the use of Kalman filters as gray-box models to expand the range of process operating conditions as MLP have poor results outside the train time window \cite{Apio2019}. In \cite{Liu2022} Liu et al. showed that Genetic Algorithms parameterized Echo State Networks were predictive in short term forecasts of three field cases. These auto-regressive models outperformed other machine learning model classes and proved to be efficient for missing flow history or short-term well performance forecast applications.
+A black-box identification procedure consists of using only data set available input and output 
+information. Freitas et al. \cite{Freitas2021} propose the use of steady-state response as an 
+additional information to improve the quality of the model predictions, creating gray-box 
+models that outperformed the black-box ones in the cases studied by adding more physical 
+information of the first principles. Similarly, Apio et al. \cite{Apio2019} propose the use of 
+Kalman filters as gray-box models to expand the range of process operating conditions as MLP 
+have poor results outside the train time window \cite{Apio2019}. In \cite{Liu2022} Liu et al. 
+showed that Genetic Algorithms parameterized Echo State Networks were predictive in short term 
+forecasts of three field cases. These auto-regressive models outperformed other machine learning 
+model classes and proved to be efficient for missing flow history or short-term well performance 
+forecast applications.
 
 % Critial analysis, paper goals, and original contributions
-The main goal of this work is to build a neural network based black-box model to predict well flow rates using available field measures like pressure gauges, surface valves positions and historical production data. Thereby, the data-driven methodology is intended to be the basis of a Digital Twin for an oil well as an alternative to production tests, first principles simulations or multiphase flowmeters, providing a useful tool to recover missing historical field data or optimize and forecast field production. Although this paper focuses on rate estimation, the techniques and framework proposed in this paper could be applicable to any desired variable.
+The main goal of this work is to build a neural network based black-box model to predict well 
+flow rates using available field measures like pressure gauges, surface valves positions and 
+historical production data. Thereby, the data-driven methodology is intended to be the basis 
+of a Digital Twin for an oil well as an alternative to production tests, first principles 
+simulations or multiphase flowmeters, providing a useful tool to recover missing historical 
+field data or optimize and forecast field production. Although this paper focuses on rate 
+estimation, the techniques and framework proposed in this paper could be applicable to any 
+desired variable.
 
-This paper's objective is to some extent shared with the works of Alakeely and Horne \cite{Alakeely2021}, Liu et al. \cite{Liu2022} and Cao et al. \cite{CaoQ2016}, with the main contributions of adding a system identification approach to the problem with the selection of the best model order (lag), best input space and comparison with more classical system identification methods through the implementation of a Python-implemented class that easily performs time series regression by using any scikit-learn regressors. The application of randomized hyperparameter search and cross-validation to the models in order to perform hyperparameter tuning and evaluate computational performance and train set sensitivity is also part of the main contributions of this paper.
+This paper's objective is to some extent shared with the works of Alakeely and Horne 
+\cite{Alakeely2021}, Liu et al. \cite{Liu2022} and Cao et al. \cite{CaoQ2016}, with the main 
+contributions of adding a system identification approach to the problem with the selection of 
+the best model order (lag), best input space and comparison with more classical system 
+identification methods through the implementation of a Python-implemented class that easily 
+performs time series regression by using any scikit-learn regressors. The application of 
+randomized hyperparameter search and cross-validation to the models in order to perform 
+hyperparameter tuning and evaluate computational performance and train set sensitivity is 
+also part of the main contributions of this paper.
 
 %The main contribution of this paper is the application in a real field well case with challenging dynamics to be identified and the methods capability to be easily generalized to any standard scikit learning regressor class.
 
 % paper organization
-This paper is organized as follows: in section \ref{section_case_study} we describe the case study, the dataset characteristics and the variables used. Also in section \ref{section_case_study}, a brief formulation of well rates estimates as a system identification problem is presented. In section \ref{section_method}, the methodology is detailed and in \ref{section_results} a discussion is conducted regarding the most important results achieved. Finally, a conclusion is made in section \ref{section_conclusion} as well as future works and analysis recommendation.
-
-% An example of a floating figure using the graphicx package.
-% Note that \label must occur AFTER (or within) \caption.
-% For figures, \caption should occur after the \includegraphics.
-% Note that IEEEtran v1.7 and later has special internal code that
-% is designed to preserve the operation of \label within \caption
-% even when the captionsoff option is in effect. However, because
-% of issues like this, it may be the safest practice to put all your
-% \label just after \caption rather than within \caption{}.
-%
-% Reminder: the "draftcls" or "draftclsnofoot", not "draft", class
-% option should be used if it is desired that the figures are to be
-% displayed while in draft mode.
-%
-%\begin{figure}[!t]
-%\centering
-%\includegraphics[width=2.5in]{myfigure}
-% where an .eps filename suffix will be assumed under latex, 
-% and a .pdf suffix will be assumed for pdflatex; or what has been declared
-% via \DeclareGraphicsExtensions.
-%\caption{Simulation results for the network.}
-%\label{fig_sim}
-%\end{figure}
-
-% Note that the IEEE typically puts floats only at the top, even when this
-% results in a large percentage of a column being occupied by floats.
-
-
-% An example of a double column floating figure using two subfigures.
-% (The subfig.sty package must be loaded for this to work.)
-% The subfigure \label commands are set within each subfloat command,
-% and the \label for the overall figure must come after \caption.
-% \hfil is used as a separator to get equal spacing.
-% Watch out that the combined width of all the subfigures on a 
-% line do not exceed the text width or a line break will occur.
-%
-%\begin{figure*}[!t]
-%\centering
-%\subfloat[Case I]{\includegraphics[width=2.5in]{box}%
-%\label{fig_first_case}}
-%\hfil
-%\subfloat[Case II]{\includegraphics[width=2.5in]{box}%
-%\label{fig_second_case}}
-%\caption{Simulation results for the network.}
-%\label{fig_sim}
-%\end{figure*}
-%
-% Note that often IEEE papers with subfigures do not employ subfigure
-% captions (using the optional argument to \subfloat[]), but instead will
-% reference/describe all of them (a), (b), etc., within the main caption.
-% Be aware that for subfig.sty to generate the (a), (b), etc., subfigure
-% labels, the optional argument to \subfloat must be present. If a
-% subcaption is not desired, just leave its contents blank,
-% e.g., \subfloat[].
-
-
-% An example of a floating table. Note that, for IEEE style tables, the
-% \caption command should come BEFORE the table and, given that table
-% captions serve much like titles, are usually capitalized except for words
-% such as a, an, and, as, at, but, by, for, in, nor, of, on, or, the, to
-% and up, which are usually not capitalized unless they are the first or
-% last word of the caption. Table text will default to \footnotesize as
-% the IEEE normally uses this smaller font for tables.
-% The \label must come after \caption as always.
-%
-%\begin{table}[!t]
-%% increase table row spacing, adjust to taste
-%\renewcommand{\arraystretch}{1.3}
-% if using array.sty, it might be a good idea to tweak the value of
-% \extrarowheight as needed to properly center the text within the cells
-%\caption{An Example of a Table}
-%\label{table_example}
-%\centering
-%% Some packages, such as MDW tools, offer better commands for making tables
-%% than the plain LaTeX2e tabular which is used here.
-%\begin{tabular}{|c||c|}
-%\hline
-%One & Two\\
-%\hline
-%Three & Four\\
-%\hline
-%\end{tabular}
-%\end{table}
-
-
-% Note that the IEEE does not put floats in the very first column
-% - or typically anywhere on the first page for that matter. Also,
-% in-text middle ("here") positioning is typically not used, but it
-% is allowed and encouraged for Computer Society conferences (but
-% not Computer Society journals). Most IEEE journals/conferences use
-% top floats exclusively. 
-% Note that, LaTeX2e, unlike IEEE journals/conferences, places
-% footnotes above bottom floats. This can be corrected via the
-% \fnbelowfloat command of the stfloats package.
+This paper is organized as follows: in section \ref{section_case_study} we describe the case 
+study, the dataset characteristics and the variables used. Also in section 
+\ref{section_case_study}, a brief formulation of well rates estimates as a system 
+identification problem is presented. In section \ref{section_method}, the methodology is 
+detailed and in \ref{section_results} a discussion is conducted regarding the most important 
+results achieved. Finally, a conclusion is made in section \ref{section_conclusion} as well as 
+future works and analysis recommendation.
 
 
 \section{Case study}\label{section_case_study}
 
-%\color{red}
-%Incluir descricao sobre o estudo de caso, considerem incluir um plot dos dados e a lista das variaveis que utilizaram. Cabe aqui tambem a formulacao do problema de modelagem de reservatorios como um problema de identificacao. 
+The Volve field is an oilfield on the North Sea discovered in 1993. The field was operated by 
+Equinor who started production in 2008 from a Middle Jurassic age sandstone reservoir 
+\cite{volve_info}. The field was shut down on 2016, with its production facilities being 
+removed in 2018.
 
-%Production history, geological data and reservoir model provided by Equinor
-%Disclosed in 2018 by Equinor
-%6 production wells + 1 water injector well
-%Available well data:
-%Well head, X-mas Tree and bottomhole pressure
-%Well head, X-mas Tree and bottomhole temperature
-%Choke openings and pressure drop
-%Oil, water and gas rates
-%\color{black}
-
-The Volve field is an oilfield on the North Sea discovered in 1993. The field was operated by Equinor who started production in 2008 from a Middle Jurassic age sandstone reservoir \cite{volve_info}. The field was shut down on 2016, with its production facilities being removed in 2018.
-
-An open-source dataset containing exploration and production data from this field, the Volve dataset, was then disclosed by operator Equinor, in 2018. The dataset contains geological, geophysical, seismic and logging data, reservoir models and reports from the Volve field \cite{volve_data}. The dataset also includes production data from the reservoir, 6 production wells and 1 injection well, which includes dynamic data of pressure and temperature sensors, choke sizes and production flow rates. Some of the variables available on the dataset for each production well and its definitions are listed on the table \ref{volve_variables}.
+An open-source dataset containing exploration and production data from this field, the Volve 
+dataset, was then disclosed by operator Equinor, in 2018. The dataset contains geological, 
+geophysical, seismic and logging data, reservoir models and reports from the Volve field 
+\cite{volve_data}. The dataset also includes production data from the reservoir, 6 production 
+wells and 1 injection well, which includes dynamic data of pressure and temperature sensors, 
+choke sizes and production flow rates. Some of the variables available on the dataset for each 
+production well and its definitions are listed on the table \ref{volve_variables}.
 
 \begin{table}[htbp]
 \caption{Volve Dataset variables and definitions used on this case}
@@ -242,11 +235,35 @@ AVG\_DP\_TUBING            &   Pressure difference between the\\
 \end{center}
 \end{table}
 
-As already established in section \ref{section_introduction}, flowrates are important variables to be estimated and predicted on a multiphase system, but also are difficult to be obtained directly. The standard approach regarding the prediction of these variables consists on creating, adjusting and maintaining simulation models based on first principles and using them to predict a well or an oilfield production throughout its life. As a general rule, at least two models, one that simulates the multiphase flow in the porous media and one that simulates it in wells and pipelines, are needed in order to predict the production rates. The main disadvantage of this approach is its great dependency of the interpretation of very uncertain data (such as geological data) and also great dependency of expert knowledge to decide which variables should be used in order to adjust the models.
+As already established in section \ref{section_introduction}, flowrates are important variables 
+to be estimated and predicted on a multiphase system, but also are difficult to be obtained 
+directly. The standard approach regarding the prediction of these variables consists on 
+creating, adjusting and maintaining simulation models based on first principles and using them 
+to predict a well or an oilfield production throughout its life. As a general rule, at least 
+two models, one that simulates the multiphase flow in the porous media and one that simulates 
+it in wells and pipelines, are needed in order to predict the production rates. The main 
+disadvantage of this approach is its great dependency of the interpretation of very uncertain 
+data (such as geological data) and also great dependency of expert knowledge to decide which 
+variables should be used in order to adjust the models.
 
-Another valid approach to create a model for an oil field or an oil well is to understand that both these entities can be seen as dynamic systems, where it is known that the history of its controls (ex.: well chokes) and some state variables (ex.: pressure and temperature measurements) can be used to predict an output variable such as its liquid rate. As mentioned by Li et at. \cite{Li2019}, experience shows that the measured pressure and temperature variables in a well are related to its controls and flow rates. This black-box model can be achieved by applying a system identification approach for this problem assuming a discrete-time systems. This method has the disadvantages of needing some production history in order to create the model and also being very dependent of how dynamically rich this data is, but also has the great advantage of having a purely data-driven model that is less dependent of geological interpretations.
+Another valid approach to create a model for an oil field or an oil well is to understand that 
+both these entities can be seen as dynamic systems, where it is known that the history of its 
+controls (ex.: well chokes) and some state variables (ex.: pressure and temperature measurements) 
+can be used to predict an output variable such as its liquid rate. As mentioned by Li et at. 
+\cite{Li2019}, experience shows that the measured pressure and temperature variables in a well 
+are related to its controls and flow rates. This black-box model can be achieved by applying a 
+system identification approach for this problem assuming a discrete-time systems. This method 
+has the disadvantages of needing some production history in order to create the model and also 
+being very dependent of how dynamically rich this data is, but also has the great advantage of 
+having a purely data-driven model that is less dependent of geological interpretations.
 
-For this work, it was not selected as a case study the whole reservoir, hence only one well will be used. The well selected was the well 15/9-F-1 C from the Volve field and its main variables available on can be seen in figure \ref{example_well}. This well was selected because it has a rich dynamic behaviour, with multiples shut-ins throughout its life, making it an interesting case for creating a black-box model. It is worth mentioning that this well was also used by Li et al. \cite{Li2019} in his work about the application of Deep Learning for well history analysis, but his work was focused on predict the downhole pressure.
+For this work, it was not selected as a case study the whole reservoir, hence only one well 
+will be used. The well selected was the well 15/9-F-1 C from the Volve field and its main 
+variables available on can be seen in figure \ref{example_well}. This well was selected 
+because it has a rich dynamic behaviour, with multiples shut-ins throughout its life, making 
+it an interesting case for creating a black-box model. It is worth mentioning that this well 
+was also used by Li et al. \cite{Li2019} in his work about the application of Deep Learning 
+for well history analysis, but his work was focused on predict the downhole pressure.
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=3.5in]{data_example_2.png}}
@@ -254,13 +271,50 @@ For this work, it was not selected as a case study the whole reservoir, hence on
 \label{example_well}
 \end{figure}
 
-It is also interesting to notice that, since the variables are all daily averages, the discrete-time approach is valid and the time series has a constant time step of one day.
+It is also interesting to notice that, since the variables are all daily averages, the 
+discrete-time approach is valid and the time series has a constant time step of one day.
 
-\section{Proposed method}\label{section_method}
+\section{Compared Methodology}\label{section_method}
 
-%\color{red}
-%detalhar o método e incluir um graphical abstract do metodo proposto
-%\color{black}
+In this section, the methodologies applied in this work in order to generate the results 
+will be briefly described.
+
+\subsection{System identification approach}
+
+System identification consists on proposing a model (either black box or gray box) that is able
+to correctly predict the behaviour of a dynamic system and perform forecasts. The approach tries 
+to propose a regression model that can estimate the value of the output variable $y$ in the 
+time instant $k$, as shown in equation \ref{eq:sysid_generic}
+
+\begin{equation}\label{eq:sysid_generic}
+    y_k = f(\mathbf{X}_{k-1})\,.
+\end{equation}
+
+Inspired by the control theory and discrete-time transfer functions, the input vector $\mathbf{X}$
+is created by concatenating previous values of the input variable $u$ and the output variable $y$,
+as illustrated in equation \ref{eq:sysid_generic}
+
+\begin{equation}\label{eq:sysid_lags}
+    \mathbf{X}_k = \
+    \begin{bmatrix}
+        u_{k} \\ u_{k-1} \\ ... \\ u_{k-n_u} \\ -y_{k} \\ -y_{k-1} \\ ... \\ -y_{k-n_y}
+    \end{bmatrix}^T\,.
+\end{equation}
+
+When the regression function $f$ is linear, the method is called ARX (\textbf{A}uto\textbf{R}egressive
+with E\textbf{X}ogenous variables). When the function is non-linear (usually a polynomial is used)
+the method is called NARX (\textbf{N}on-linear ARX). Due to the generic nature of the function $f$,
+any regressor (including fully-connected neural networks) can be used to create the model.
+
+Among the advantages of the system identification approach it can be found the simplicity of the model,
+its flexibility to different regressors. It is also important to comment that, even thoug equation \ref{eq:sysid_lags}
+exemplifies the system identification approach with only a single input and a single output, multiple values of input and
+output are also possible by adding more data to the
+Some disadvantages of the approach include the need of data
+with constant timestepping and, depending on the number of inputs, outputs and lag sizes, the amount of
+memory spent in matrix $\mathbf{X}$ in order to store repeated data.
+
+\subsection{Transformer architecture}
 
 The method proposed in this study consists on applying a system identification approach to create a black-box model capable of simulate the dynamic behaviour of a production well. Since the time series has a constant timestep, this approach consists on finding a regressor capable of estimating the output variable by using a number of delayed values of the input and output variables, with the this number for each variable, in our case, being equal to a maximum lag provided as an input. After the creation of the regression vectors for each output value, any regression method can be used in order to create a model, with the more classical ones being a linear regressor (ARX model) and a polynomial regressor (Polynomial NARX model).
 
@@ -401,28 +455,22 @@ Figure \ref{final_results} shows the main results obtained for the three estimat
 \begin{table*}[htbp]
 \caption{Metrics results for realized tests}
 \begin{center}
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
-\textbf{Method,}&\textbf{Best}&\multicolumn{4}{|c|}{\textbf{Train data}}&\multicolumn{4}{|c|}{\textbf{Total data}}&\textbf{Fit}&\textbf{Rank} \\
+\textbf{Method,}&\textbf{Best}&\multicolumn{4}{|c|}{\textbf{Train data}}&\multicolumn{4}{|c|}{\textbf{Total data}}&\textbf{Rank} \\
 \cline{3-10} 
-\textbf{Inputs} & \textbf{lag} & \textbf{\textit{R$^{\mathrm{2}}$ OSA}}& \textbf{\textit{R$^{\mathrm{2}}$ FS}}& \textbf{\textit{RMSE OSA}}& \textbf{\textit{RMSE FS}}& \textbf{\textit{R$^{\mathrm{2}}$ OSA}}& \textbf{\textit{R$^{\mathrm{2}}$ FS}} & \textbf{\textit{RMSE OSA}}& \textbf{\textit{RMSE FS}}&\textbf{time (s)}& \\
+\textbf{Inputs} & \textbf{lag} & \textbf{\textit{R$^{\mathrm{2}}$ OSA}}& \textbf{\textit{R$^{\mathrm{2}}$ FS}}& \textbf{\textit{RMSE OSA}}& \textbf{\textit{RMSE FS}}& \textbf{\textit{R$^{\mathrm{2}}$ OSA}}& \textbf{\textit{R$^{\mathrm{2}}$ FS}} & \textbf{\textit{RMSE OSA}}& \textbf{\textit{RMSE FS}}& \\
 \hline
-LinReg, SISO &  2 & 0.774 & 0.776 & 0.126 & 0.209 & 0.371 & 0.396 & 0.129 & 0.213&1.09e-3&5\\
-%SISO    &&&&&&&&& \\
 \hline
-PolyReg, SISO&  2 & 0.774 & 0.776 & 0.126 & 0.209 & 0.371 & 0.396 & 0.129 & 0.213&1.53e-3&5\\
-%SISO    &&&&&&&&& \\
-\hline
-MLP, SISO    & 17 & 0.822 & 0.796 & 0.111 & 0.163 & 0.620 & 0.643 & 0.123 & 0.163&4.80e-1&3\\
-%SISO    &&&&&&&&& \\
-\hline
-LinReg, MISO &  4 & 0.803 & 0.795 & 0.117 & 0.170 & 0.585 & 0.592 & 0.124 & 0.175&1.32e-3&4\\
+ARX          &  4 & 0.803 & 0.795 & 0.117 & 0.170 & 0.585 & 0.592 & 0.124 & 0.175&4\\
 %MISO    &&&&&&&&& \\
 \hline
-PolyReg, MISO&  5 & 0.821 & 0.810 & 0.112 & 0.155 & 0.655 & 0.662 & 0.119 & 0.159&3.64e-2&2\\
+NARX         &  5 & 0.821 & 0.810 & 0.112 & 0.155 & 0.655 & 0.662 & 0.119 & 0.159&2\\
 %MISO    &&&&&&&&& \\
 \hline
-MLP, MISO    &  6 & 0.898 & 0.852 & 0.084 & 0.139 & 0.723 & 0.688 & 0.105 & 0.153&3.67e-1&1\\
+MLP          &  6 & 0.898 & 0.852 & 0.084 & 0.139 & 0.723 & 0.688 & 0.105 & 0.153&1\\
+\hline
+Transformer  &  6 & 0.898 & 0.852 & 0.084 & 0.139 & 0.723 & 0.688 & 0.105 & 0.153&1\\
 %MISO    &&&&&&&&& \\
 \hline
 \end{tabular}
@@ -541,12 +589,3 @@ For future works, it is proposed to apply the same methodology to other sklearn 
 
 % that's all folks
 \end{document}
-
-
-About
-About us
-Our values
-Careers
-Press & awards
-Blog
-Learn
