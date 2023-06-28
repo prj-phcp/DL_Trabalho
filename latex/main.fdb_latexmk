@@ -1,16 +1,16 @@
 # Fdb version 3
-["bibtex main"] 1687970892 "main.aux" "main.bbl" "main" 1687970895
+["bibtex main"] 1687974088 "main.aux" "main.bbl" "main" 1687974091
   "/usr/share/texlive/texmf-dist/bibtex/bib/IEEEtran/IEEEabrv.bib" 1440712899 20898 a5d2167c380db7dfff810b085c77ed63 ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/IEEEtran/IEEEtran.bst" 1440712899 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
-  "main.aux" 1687970894 5101 255415e3b799d92b784a6533128bba0e "pdflatex"
+  "main.aux" 1687974090 5101 98dd06d07e77e3cd8ac2ebcd39f53039 "pdflatex"
   "references.bib" 1687869190 21625 3ce0ce9c4f30c6e9ba112f9fb767b1e3 ""
   (generated)
-  "main.blg"
   "main.bbl"
-["pdflatex"] 1687970892 "/home/c5ef-linux/github/DL_Trabalho/latex/main.tex" "/home/c5ef-linux/github/DL_Trabalho/latex/main.pdf" "main" 1687970895
+  "main.blg"
+["pdflatex"] 1687974088 "/home/c5ef-linux/github/DL_Trabalho/latex/main.tex" "/home/c5ef-linux/github/DL_Trabalho/latex/main.pdf" "main" 1687974091
   "/etc/texmf/web2c/texmf.cnf" 1678837398 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/c5ef-linux/github/DL_Trabalho/latex/main.aux" 1687970894 5101 255415e3b799d92b784a6533128bba0e ""
-  "/home/c5ef-linux/github/DL_Trabalho/latex/main.tex" 1687970888 46785 472dd5df3038bb9bcd732268958da44d ""
+  "/home/c5ef-linux/github/DL_Trabalho/latex/main.aux" 1687974090 5101 98dd06d07e77e3cd8ac2ebcd39f53039 ""
+  "/home/c5ef-linux/github/DL_Trabalho/latex/main.tex" 1687974084 43496 67249c698239f329fc595d169a33e0ec ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm" 1136768653 2172 fd0c924230362ff848a33632ed45dc23 ""
@@ -101,12 +101,12 @@
   "images/data_example_2.png" 1687868930 346599 cac19937a7529ee888eff9d00351db3b ""
   "images/graphical_abstract.png" 1687868937 130004 f36ced5f64a6b467400d9cb91502b01d ""
   "images/wellScheme.PNG" 1687869238 39491 8425db7c37fc046bc439c1c3af9c4078 ""
-  "main.aux" 1687970894 5101 255415e3b799d92b784a6533128bba0e "pdflatex"
-  "main.bbl" 1687970892 5836 f64f0697eb8f13199b58c9c2a6446e92 "bibtex main"
-  "main.tex" 1687970888 46785 472dd5df3038bb9bcd732268958da44d ""
+  "main.aux" 1687974090 5101 98dd06d07e77e3cd8ac2ebcd39f53039 "pdflatex"
+  "main.bbl" 1687974088 5836 f64f0697eb8f13199b58c9c2a6446e92 "bibtex main"
+  "main.tex" 1687974084 43496 67249c698239f329fc595d169a33e0ec ""
   (generated)
+  "/home/c5ef-linux/github/DL_Trabalho/latex/main.log"
+  "main.pdf"
   "/home/c5ef-linux/github/DL_Trabalho/latex/main.pdf"
   "main.log"
   "main.aux"
-  "/home/c5ef-linux/github/DL_Trabalho/latex/main.log"
-  "main.pdf"

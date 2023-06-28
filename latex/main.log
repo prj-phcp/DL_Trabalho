@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2023.3.14)  28 JUN 2023 13:48
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2023.3.14)  28 JUN 2023 14:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -303,24 +303,24 @@ Package caption Info: End \AtBeginDocument code.
 <images/wellScheme.png, id=1, 457.10776pt x 443.85825pt>
 File: images/wellScheme.png Graphic file (type png)
 <use images/wellScheme.png>
-Package pdftex.def Info: images/wellScheme.png  used on input line 55.
+Package pdftex.def Info: images/wellScheme.png  used on input line 93.
 (pdftex.def)             Requested size: 216.81pt x 210.53008pt.
  [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ] [2 </home/c5ef-linux/github/DL_Trabalho/latex/images/wellScheme.PNG>]
-LaTeX Font Info:    Trying to load font information for U+msa on input line 184.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 190.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 184.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 190.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 <images/data_example_2.png, id=15, 866.23625pt x 1637.11626pt>
 File: images/data_example_2.png Graphic file (type png)
 <use images/data_example_2.png>
-Package pdftex.def Info: images/data_example_2.png  used on input line 239.
+Package pdftex.def Info: images/data_example_2.png  used on input line 269.
 (pdftex.def)             Requested size: 252.94499pt x 478.04897pt.
 
 Underfull \vbox (badness 1122) has occurred while \output is active []
@@ -329,28 +329,28 @@ Underfull \vbox (badness 1122) has occurred while \output is active []
 <images/graphical_abstract.png, id=26, 942.4008pt x 372.4314pt>
 File: images/graphical_abstract.png Graphic file (type png)
 <use images/graphical_abstract.png>
-Package pdftex.def Info: images/graphical_abstract.png  used on input line 289.
+Package pdftex.def Info: images/graphical_abstract.png  used on input line 326.
 (pdftex.def)             Requested size: 433.62pt x 171.36598pt.
  [4 </home/c5ef-linux/github/DL_Trabalho/latex/images/data_example_2.png>] [5 </home/c5ef-linux/github/DL_Trabalho/latex/images/graphical_abstract.png>]
 <images/LinReg_comparison_big.png, id=38, 1635.10875pt x 633.36626pt>
 File: images/LinReg_comparison_big.png Graphic file (type png)
 <use images/LinReg_comparison_big.png>
-Package pdftex.def Info: images/LinReg_comparison_big.png  used on input line 402.
+Package pdftex.def Info: images/LinReg_comparison_big.png  used on input line 439.
 (pdftex.def)             Requested size: 433.62pt x 167.95723pt.
 <images/PolyReg_comparison_big.png, id=39, 1635.10875pt x 633.36626pt>
 File: images/PolyReg_comparison_big.png Graphic file (type png)
 <use images/PolyReg_comparison_big.png>
-Package pdftex.def Info: images/PolyReg_comparison_big.png  used on input line 406.
+Package pdftex.def Info: images/PolyReg_comparison_big.png  used on input line 443.
 (pdftex.def)             Requested size: 433.62pt x 167.95723pt.
 <images/MLP_comparison_big.png, id=40, 1635.10875pt x 633.36626pt>
 File: images/MLP_comparison_big.png Graphic file (type png)
 <use images/MLP_comparison_big.png>
-Package pdftex.def Info: images/MLP_comparison_big.png  used on input line 410.
+Package pdftex.def Info: images/MLP_comparison_big.png  used on input line 447.
 (pdftex.def)             Requested size: 433.62pt x 167.95723pt.
 <images/boxplot_cv.png, id=41, 624.3325pt x 449.68pt>
 File: images/boxplot_cv.png Graphic file (type png)
 <use images/boxplot_cv.png>
-Package pdftex.def Info: images/boxplot_cv.png  used on input line 500.
+Package pdftex.def Info: images/boxplot_cv.png  used on input line 537.
 (pdftex.def)             Requested size: 252.94499pt x 182.18115pt.
  [6] [7 </home/c5ef-linux/github/DL_Trabalho/latex/images/LinReg_comparison_big.png> </home/c5ef-linux/github/DL_Trabalho/latex/images/PolyReg_comparison_big.png> </home/c5ef-linux/github/DL_Trabalho/latex/images/MLP_comparison_big.png>] (/home/c5ef-linux/github/DL_Trabalho/latex/main.bbl [8 </home/c5ef-linux/github/DL_Trabalho/latex/images/boxplot_cv.png>])
 
@@ -374,9 +374,9 @@ Here is how much of TeX's memory you used:
  19963 multiletter control sequences out of 15000+600000
  574222 words of font info for 103 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,11n,49p,2168b,339s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,11n,49p,1394b,339s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on /home/c5ef-linux/github/DL_Trabalho/latex/main.pdf (9 pages, 1524113 bytes).
+Output written on /home/c5ef-linux/github/DL_Trabalho/latex/main.pdf (9 pages, 1524554 bytes).
 PDF statistics:
  101 PDF objects out of 1000 (max. 8388607)
  66 compressed objects within 1 object stream
