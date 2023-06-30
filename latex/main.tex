@@ -25,11 +25,19 @@
 \maketitle
 
 \begin{abstract}
-In the oil and gas industry, long-term development strategies as well as short-term operational decisions rely on well monitoring data. In recent years, this industry has benefited from machine learning techniques as the availability and quality of oil field data, allowing the application of data-driven models to fit and predict field behaviour and provide better business decisions. Among the variables of interest, the production rates are worth studying due to its connection to the revenue and uncertainties associated to its determination.
+In the oil and gas industry, long-term development strategies as well as short-term operational decisions rely on well monitoring data. In recent years, 
+this industry has benefited from machine learning techniques as the availability and quality of oil field data, allowing the application of data-driven models 
+to fit and predict field behaviour and provide better business decisions. Among the variables of interest, the production rates are worth studying due to its 
+connection to the revenue and uncertainties associated to its determination.
 
-This study provides a system identification approach to create black-box estimators to predict production rates in oil wells by using control settings and sensor data from the well. One well from the Volve dataset was chosen as the benchmark and a python-implemented class was deployed in order to use sklearn-compatible regressor to perform the adjust. A comparison of a neural network with more classical estimators fore system identification is performed for single input and multiple input cases with the best lag order selection and hyperparameter randomized search being performed for each case.
+This study provides a system identification approach to create black-box estimators to predict production rates in oil wells by using control settings and sensor 
+data from the well. One well from the Volve dataset was chosen as the benchmark and a python-implemented class was deployed in order to use sklearn-compatible 
+regressor to perform the adjust. A comparison of a neural network with more classical estimators fore system identification is performed for single input and multiple 
+input cases with the best lag order selection and hyperparameter randomized search being performed for each case.
 
-The final models showed interesting results when compared to the real data, with the MLP outperforming the more classical models and the multiple input cases outperforming the single input cases. single input MLP was also noted as an alternative to reduce the dependency of well sensors and the multiple input NARX-equivalent method was noted as an alternative for cases where computational resources might be an issue.
+The final models showed interesting results when compared to the real data, with the MLP outperforming the more classical models and the multiple input cases outperforming 
+the single input cases. single input MLP was also noted as an alternative to reduce the dependency of well sensors and the multiple input NARX-equivalent method was noted 
+as an alternative for cases where computational resources might be an issue.
 
 %This study provides a black box system identification approach to overcome these limitations and address the well monitoring challenges, being an alternative to conventional well flow rates estimation and pressure-temperature gauges unavailability. We focused in well flow rates estimation based on operational available input data and aiming missing production history, reservoir management and production forecast applications: a digital twin for an oil well.
 
