@@ -1,1 +1,11 @@
 *-checkpoint.*
+*.aux
+*.fdb_latexmk
+*.log
+*.bbl
+*.blg
+*.out
+*.gz
+*.fls
+*.gz
+*__pycache__*
