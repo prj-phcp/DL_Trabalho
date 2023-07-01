@@ -562,7 +562,7 @@ for mem in memory:
                     
                     
                     results['MODEL'].append(best_model)
-                    results['MEMORY'].append(memory)
+                    results['MEMORY'].append(mem)
                     results['HEADS'].append(n_heads)
                     results['ENCODER LAYERS'].append(enc_l)
                     results['LINEAR LAYERS'].append(lin_l)
