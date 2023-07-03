@@ -18,9 +18,26 @@
 % every instance of \includegraphics
 % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
 
-\title{Oil Well Monitoring and Production Forecast with Artificial Intelligence using System Identification techniques}
+\title{Application of Transformers for Oil Well Production Forecasting}
 
-\author{\IEEEauthorblockN{Anonymous Authors}}
+\author{\IEEEauthorblockN{1\textsuperscript{st} Pedro Henrique Cardoso Paulo}
+\IEEEauthorblockA{\textit{Mechanical Engineering Department} \\
+\textit{Petrobras and PUC-Rio}\\
+Rio de Janeiro, Brazil \\
+pedrorjpaulo.phcp@gmail.com}
+\and
+\IEEEauthorblockN{2\textsuperscript{nd} Felipe da Costa Pereira}
+\IEEEauthorblockA{\textit{Mechanical Engineering Department} \\
+\textit{Petrobras and PUC-Rio}\\
+Rio de Janeiro, Brazil \\
+felipecostapereira@gmail.com}
+\and
+\IEEEauthorblockN{3\textsuperscript{rd} Helon Vicente Hultmann Ayala}
+\IEEEauthorblockA{\textit{Mechanical Engineering Department} \\
+\textit{PUC-Rio}\\
+Rio de Janeiro, Brazil \\
+helon@puc-rio.br}
+}
 
 \maketitle
 
@@ -30,14 +47,14 @@ this industry has benefited from machine learning techniques as the availability
 to fit and predict field behaviour and provide better business decisions. Among the variables of interest, the production rates are worth studying due to its 
 connection to the revenue and uncertainties associated to its determination.
 
-This study provides a system identification approach to create black-box estimators to predict production rates in oil wells by using control settings and sensor 
-data from the well. One well from the Volve dataset was chosen as the benchmark and a python-implemented class was deployed in order to use sklearn-compatible 
-regressor to perform the adjust. A comparison of a neural network with more classical estimators fore system identification is performed for single input and multiple 
-input cases with the best lag order selection and hyperparameter randomized search being performed for each case.
+This study makes use do the transformer neural network architecture in order to perform the production forecast of an oil well from the Volve dataset. 
+The results are compared with other possible solutions for the task, such as the system identification approach using different regressors. An statistical analysis
+of the model and hyperparameter investigation is also presented. 
 
-The final models showed interesting results when compared to the real data, with the MLP outperforming the more classical models and the multiple input cases outperforming 
-the single input cases. single input MLP was also noted as an alternative to reduce the dependency of well sensors and the multiple input NARX-equivalent method was noted 
-as an alternative for cases where computational resources might be an issue.
+The final models showed interesting results when compared to the real data, with the transformer being the best model in the base case.
+The statistical tests performed indicated low impact of the memory size and more tendency of outlier models in case of a large number of encoder layers
+for a dataset comprised of one single well with relatively few samples. The transfer learning test showed promising results in OSE predictions, but failed
+in a Free-run simulation, which is the main interest of the work, with further tests to improve being needed.
 
 %This study provides a black box system identification approach to overcome these limitations and address the well monitoring challenges, being an alternative to conventional well flow rates estimation and pressure-temperature gauges unavailability. We focused in well flow rates estimation based on operational available input data and aiming missing production history, reservoir management and production forecast applications: a digital twin for an oil well.
 
@@ -45,10 +62,10 @@ as an alternative for cases where computational resources might be an issue.
 \end{abstract}
 
 \begin{IEEEkeywords}
-system identification, scikit-learn, neural network, oil and gas, production forecast, digital twin.
+transformers, pytorch, neural network, oil and gas, production forecast, digital twin.
 \end{IEEEkeywords}
 
-\section{Introduction}\label{section_introduction}
+\section{Introduction}\label{sec:section_introduction}
 % no \IEEEPARstart
 
 % INTRODUCAO
@@ -82,11 +99,7 @@ order to correctly match the actual dynamic historic behaviour is the process kn
 match \cite{alakeely2022simulating}. Li et al. \cite{Li2019} comment that this approach, due 
 to some simplified assumptions, may generate uncertain models and also cites the pressure 
 dependency of the flow rate as input, an already uncertain variable, as a major limitation. 
-Cao et al. \cite{CaoQ2016} also comments that, specially for unconventional resources, a 
-conventional characterization of the field may not be feasible thanks to ultra-tight shale 
-formations for some unconventional fields, uncertainties in the geological properties and 
-heterogeneous rock formations, being the last two challenges commonly found even in more 
-conventional assets. The dependency of well sensors for the history match can also be a 
+The dependency of well sensors for the history match can also be a 
 challenge, since there is always a risk of losing some measurements. As an example, the 
 donwhole pressure is one of the most important variable to provide useful information for 
 management and oil recovery of the oil field \cite{camponogara2010automation} but the PDG 
@@ -108,7 +121,15 @@ Reservoir management area has recently benefited from machine learning methods t
 powerful tools to address these key challenges \cite{alakeely2022simulating}, posing as an 
 alternative to the conventional first principles approach. Many studies have addressed the 
 problem of predicting well rates and reservoir monitoring by the use of artificial intelligence 
-techniques such as machine learning methods. According to Alakeely et al. \cite{AlakeelyGA2022}, these models are powerful tools for tasks where the actual model between the input and output variables is not well defined or does not exist, and where forward modeling is well defined, but the inverse model is challenging. The difficulty in modeling the dynamic behaviour of those systems is that they present a wide range of operating conditions what makes the prediction task a challenging one \cite{Freitas2021} \cite{Apio2019}. This happens because the physical phenomena that happen in a certain time window on a well production history are not expected to be repeated over time as the water and gas fractions tend to rise and the pressure levels tend to monotonically decrease. These variables are responsible for changing the well behavior in several parameters, like productivity index, phase viscosities and densities. 
+techniques such as machine learning methods. According to Alakeely et al. \cite{AlakeelyGA2022}, 
+these models are powerful tools for tasks where the actual model between the input and output variables 
+is not well defined or does not exist, and where forward modeling is well defined, but the inverse model 
+is challenging. The difficulty in modeling the dynamic behaviour of those systems is that they present 
+a wide range of operating conditions what makes the prediction task a challenging one \cite{Freitas2021} 
+\cite{Apio2019}. This happens because the physical phenomena that happen in a certain time window on a 
+well production history are not expected to be repeated over time as the water and gas fractions tend to
+rise and the pressure levels tend to monotonically decrease. These variables are responsible for changing 
+the well behavior in several parameters, like productivity index, phase viscosities and densities. 
 
 Alakeely and Horne \cite{Alakeely2021} proposed a Deep Learning method using surface measurements 
 to predict well flow rates. Also in \cite{Alakeely2021}, autoencoders were used to generate 
@@ -130,53 +151,42 @@ provided by Jourdanou et al. \cite{JORDANOU2019} where the data is generated by 
 simulator and the framework is then used for nonlinear model predictive control (NMPC) 
 purposes. Li et al. \cite{Li2019} also modeled the downhole pressure with deep learning 
 models, searching for the best architecture to represent short-term transients and long-term 
-variations. %, but also using the rates as inputs.
+variations.
 
-A black-box identification procedure consists of using only data set available input and output 
-information. Freitas et al. \cite{Freitas2021} propose the use of steady-state response as an 
-additional information to improve the quality of the model predictions, creating gray-box 
-models that outperformed the black-box ones in the cases studied by adding more physical 
-information of the first principles. Similarly, Apio et al. \cite{Apio2019} propose the use of 
-Kalman filters as gray-box models to expand the range of process operating conditions as MLP 
-have poor results outside the train time window \cite{Apio2019}. In \cite{Liu2022} Liu et al. 
-showed that Genetic Algorithms parameterized Echo State Networks were predictive in short term 
-forecasts of three field cases. These auto-regressive models outperformed other machine learning 
-model classes and proved to be efficient for missing flow history or short-term well performance 
-forecast applications.
+Still on the matter of time series regression and foreacasting, the transformer neural network architecture
+is seen as a competitive and flexible architecture to perform the task. It was originally proposed 
+for the task of NLP, which can be considered a complex time series problem, and has considerable advantages
+when compared to methods such as NARMAX and other deep learning techiniques such as RNN ans LSTM regarding
+the time window it can consider and paralelization of the training. Pazouki and Farsani \cite{transformers_ts_forecasting}
+used an adapted version of the architecture in multiple benckmark datasets and obtained better or equivalent results when compared to
+other methods. Zerveas et al. \cite{multivariate_ts_forecasting} propose not only the use of the transformer architecture
+for time series tasks, such as regression and classification, but also a generalistic framework for working with multivariate
+time series using the architecture, claiming that it would be possible to also perform an unsupervised pre-training of the network
+by using it in autoregression tasks. Zerveas et al. \cite{multivariate_ts_forecasting} also apply their proposed architecture to various
+time series problems, obtaining better or close results when compared to other methodologies.
 
 % Critial analysis, paper goals, and original contributions
-The main goal of this work is to build a neural network based black-box model to predict well 
-flow rates using available field measures like pressure gauges, surface valves positions and 
-historical production data. Thereby, the data-driven methodology is intended to be the basis 
-of a Digital Twin for an oil well as an alternative to production tests, first principles 
-simulations or multiphase flowmeters, providing a useful tool to recover missing historical 
-field data or optimize and forecast field production. Although this paper focuses on rate 
-estimation, the techniques and framework proposed in this paper could be applicable to any 
-desired variable.
+The main goal of this work is to investigate the applicability of the transformer architecture
+to the task of creating a black-box model for production forecasting using real data from Volve
+dataset \cite{volve_data}. This approach will be compared with other forecasting models created
+using the system identification methodology. The statistical variation of the final model, and 
+the impact of some hyperparameters of the proposed simplified transformer architecture will also 
+be investigated.
 
-This paper's objective is to some extent shared with the works of Alakeely and Horne 
-\cite{Alakeely2021}, Liu et al. \cite{Liu2022} and Cao et al. \cite{CaoQ2016}, with the main 
-contributions of adding a system identification approach to the problem with the selection of 
-the best model order (lag), best input space and comparison with more classical system 
-identification methods through the implementation of a Python-implemented class that easily 
-performs time series regression by using any scikit-learn regressors. The application of 
-randomized hyperparameter search and cross-validation to the models in order to perform 
-hyperparameter tuning and evaluate computational performance and train set sensitivity is 
-also part of the main contributions of this paper.
 
 %The main contribution of this paper is the application in a real field well case with challenging dynamics to be identified and the methods capability to be easily generalized to any standard scikit learning regressor class.
 
 % paper organization
-This paper is organized as follows: in section \ref{section_case_study} we describe the case 
-study, the dataset characteristics and the variables used. Also in section 
-\ref{section_case_study}, a brief formulation of well rates estimates as a system 
-identification problem is presented. In section \ref{section_method}, the methodology is 
-detailed and in \ref{section_results} a discussion is conducted regarding the most important 
-results achieved. Finally, a conclusion is made in section \ref{section_conclusion} as well as 
+This paper is organized as follows: in section \ref{sec:section_case_study} we describe the case 
+study, the dataset characteristics and the variables used. In section \ref{sec:compared_approaches}, 
+both the system identification approach and the transformer architecture are briefly explained and compared.
+In section \ref{sec:section_method}, training and comparison methodology is 
+detailed and in \ref{sec:section_results} a discussion is conducted regarding the most important 
+results achieved. Finally, a conclusion is made in section \ref{sec:section_conclusion} as well as 
 future works and analysis recommendation.
 
 
-\section{Case study}\label{section_case_study}
+\section{Case study}\label{sec:section_case_study}
 
 The Volve field is an oilfield on the North Sea discovered in 1993. The field was operated by 
 Equinor who started production in 2008 from a Middle Jurassic age sandstone reservoir 
@@ -189,7 +199,7 @@ geophysical, seismic and logging data, reservoir models and reports from the Vol
 \cite{volve_data}. The dataset also includes production data from the reservoir, 6 production 
 wells and 1 injection well, which includes dynamic data of pressure and temperature sensors, 
 choke sizes and production flow rates. Some of the variables available on the dataset for each 
-production well and its definitions are listed on the table \ref{volve_variables}.
+production well and its definitions are listed on the table \ref{tab:volve_variables}.
 
 \begin{table}[htbp]
 \caption{Volve Dataset variables and definitions used on this case}
@@ -239,11 +249,11 @@ AVG\_DP\_TUBING            &   Pressure difference between the\\
                            &   average wellhead pressure \\
 \hline
 \end{tabular}
-\label{volve_variables}
+\label{tab:volve_variables}
 \end{center}
 \end{table}
 
-As already established in section \ref{section_introduction}, flowrates are important variables 
+As already established in section \ref{sec:section_introduction}, flowrates are important variables 
 to be estimated and predicted on a multiphase system, but also are difficult to be obtained 
 directly. The standard approach regarding the prediction of these variables consists on 
 creating, adjusting and maintaining simulation models based on first principles and using them 
@@ -279,13 +289,9 @@ for well history analysis, but his work was focused on predict the downhole pres
 \label{example_well}
 \end{figure}
 
-It is also interesting to notice that, since the variables are all daily averages, the 
-discrete-time approach is valid and the time series has a constant time step of one day.
+\section{Compared Approaches}\label{sec:compared_approaches}
 
-\section{Compared Methodology}\label{section_method}
-
-In this section, the methodologies applied in this work in order to generate the results 
-will be briefly described.
+In this section, the two main approaches compared in this work are presented.
 
 \subsection{System identification approach}
 
@@ -300,7 +306,7 @@ time instant $k$, as shown in equation \ref{eq:sysid_generic}
 
 Inspired by the control theory and discrete-time transfer functions, the input vector $\mathbf{X}$
 is created by concatenating previous values of the input variable $u$ and the output variable $y$,
-as illustrated in equation \ref{eq:sysid_generic}
+as illustrated in equation \ref{eq:sysid_lags}
 
 \begin{equation}\label{eq:sysid_lags}
     \mathbf{X}_k = \
@@ -324,243 +330,304 @@ memory spent in matrix $\mathbf{X}$ in order to store repeated data.
 
 \subsection{Transformer architecture}
 
-The method proposed in this study consists on applying a system identification approach to create a black-box model capable of simulate the dynamic behaviour of a production well. Since the time series has a constant timestep, this approach consists on finding a regressor capable of estimating the output variable by using a number of delayed values of the input and output variables, with the this number for each variable, in our case, being equal to a maximum lag provided as an input. After the creation of the regression vectors for each output value, any regression method can be used in order to create a model, with the more classical ones being a linear regressor (ARX model) and a polynomial regressor (Polynomial NARX model).
+The Transformer technology was originally proposed in the article \textbf{Attention is all you need} \cite{attention_is_all},
+being originally thought for the task of natural language processing (NLP) and text translation. Ever since, the architecture
+saw it's popularity grow exponentially, with usage iven in image processing \cite{transformers_for_images}, a domain historically
+dominated by CNNs.
 
-The basic pipeline performed on this work is shown in figure \ref{graphical_abstract}. In order to build the regression matrices using the defined lags, fit and predict using the fitted model, a Python class was implemented that allowed the use of any regressor from the scikit-learn (sklearn) \cite{scikit-learn} package to perform the regression of the model. The class also gives support for free-run simulations (where simulated outputs are used as input for the prediction of the next step) and one-step ahead simulations (where each predicted step uses real lagged outputs on this prediction). 
+Just like the attention mechanism, transformers make use of the similarity concept to add context to data, allowing better predictions
+in sets of inputs. Due to similarities between the NLP and time series in general, the architecture has been proposed as
+an alternative to classical deep learning architectures for dealing with time series, like in the works of  Pazouki and Farsani \cite{transformers_ts_forecasting} and 
+Zerveas et al. \cite{multivariate_ts_forecasting}.
 
-The production history from the selected well (15/9-F-1 C) was split into a train set composed of the first 70\% of the production history and a test set composed of the remaining 30\%. It was then normalized by ensuring that all the values on the train data would be contained on a [0, 1] interval. In order to evaluate the importance of using multiple sensors to fit the model, the train data was fed to the pipeline on a single input single output (SISO) schema, where only the choke size was used as an input variable, and on a multiple input single output (MISO) schema, where choke size and pressure and temperature data on the wellhead and bottom-hole were used as inputs.
+The proposed architecture for this work is presented in Figure \ref{fig:transformer_architecture}. The architecture consists only of the
+Encoder branch of the Transformer model and its input has as features both the inputs and the desired output one timestep before the
+desired prediction timestep. It is important to notice that this makes necessary the use of a mask in training time, since for all but
+the last timestep in the window (whose prediction is our main objective) the input already contains the desired output.
+The possibility of adding some Fully-connected layers after the transformer was also implemented in the model
+in order to allow tests with te combination of transformer and MLP architectures.
+
+\begin{figure}[htbp]
+    \centerline{\includegraphics[width=0.48\textwidth]{images/transformer_architecture.png}}
+    \caption{Proposed transformer architecture}
+    \label{fig:transformer_architecture}
+\end{figure}
+
+Due to the relative simplicity of the analyzed problem when compared to the challenges of NLP, some simplifications were made to the
+classical transformer architecture. First, no positional encoding was considered in this work, in a way that all the window information
+will be equally used to predict the next timestep. Also, since the transformer input was considered to be the normalized features of the timeseries,
+and not some sort of encoding of them, the term usually used to correct the effect of the norm in high-dimensionality spaces, $\sqrt{d_k}$,
+was also ignored.
+
+When compared to other deep learning architectures used for time series regression and forecasting, such as all variations of
+recurrent neural networks, the transformer architecture has the advantage of being fully paralelizable and having essentially
+infinite memory (or at least as large as the input window provided). It also shows some advantages when compared with the system
+identification approach already presented, since it does not demand a fixed lag size for every prediction and also allows some
+some oprimizations in reducing the numper of replicated inputs in the input matrix.
+
+\section{Methodology}\label{sec:section_method}
+
+In this section the general methodology for evaluating and comparing the models will be presented.
+
+\subsection{System identification models}
+
+%The graphical abstract of the system identification model selection pipeline is presented in Figure \ref{fig:graphical_abstract_sysid}.
+Since the main scope of this work is to investigate the use of the transformer architecture, no further detail of this approach will be
+discussed as it will serve only as a reference for comparison.
+
+%\begin{figure*}[htbp]
+%    \centerline{\includegraphics[width=6.0in]{images/graphical_abstract.png}}
+%    \caption{Graphical Abstract and Optimal model selection procedure for the system identification models}
+%    \label{fig:graphical_abstract_sysid}
+%\end{figure*}
+
+Four regressors will be compared in this approach, all built using the Scikit-learn \cite{sklearn_manual} Python package.
+The Table \ref{tab:skl_regressors} shows the estimators considered for comparison.
+\begin{table}[htbp]
+    \caption{Scikit-learn regressors used for the system identification}
+    \begin{center}
+    \begin{tabular}{|c|c|}
+    \hline
+    \textbf{Method}&{\textbf{sklearn regressor}} \\
+    \hline
+    ARX  & LinearRegression  \\
+    \hline
+    NARX & PolynomialFeatures + LinearRegression   \\
+    \hline
+    KNN & KNeighborsRegressor   \\
+    \hline
+    MLP & MLPRegressor  \\
+    \hline
+    \end{tabular}
+    \label{tab:skl_regressors}
+    \end{center}
+    \end{table}
+
+\subsection{Transformer models}
+
+Figure \ref{fig:graphical_abstract_transfomers} shows the basic pipeline followed
+to train the transformer model. The neural network framework used to implement the 
+model was the Pytorch package, with the encoder layer blocks used being the one already 
+implemented in the library. A key difference between the transformer pipeline and the
+system identification pipeline originally used rests on the normalization step. While 
+the system identifications models normalized their data by dividing it by the maximum
+value in the time series, for the transformer the 95\% quantile was used, making the absolute values
+of the time series to get slightly bigger. This shall be corrected when comparing error
+metrics, that wll be discussed in the next section.
 
 \begin{figure*}[htbp]
-\centerline{\includegraphics[width=6.0in]{images/graphical_abstract.png}}
-\caption{Graphical Abstract and Optimal model selection procedure}
-\label{graphical_abstract}
+    \centerline{\includegraphics[width=6in]{images/graphical_abstract_transformers.png}}
+    \caption{Transformer graphical pipeline}
+    \label{fig:graphical_abstract_transfomers}
 \end{figure*}
 
-As a mean to compare different regressors, three were selected and built using the sklearn available objects. These regressors are summarized in table \ref{regressors}. The  first two, LinReg and PolyReg, are equivalent to the classical ARX ans Polynomial NARX methods used in system identification. For the PolyReg model, it was assumed a polynomial degree of two for this study.
+The transformer architecture used in this work allows the variation of the number of
+encoder layers and the number of fully-connected layers after the encoder. The training procedure
+also allows the variation of the memory used, i.e., the number of vectors passed to the
+transformer in order to perform a prediction or train the network. As a base case, a memory window of 16
+in a transformer with 1 encoder layer and no fully-connected layer will be considered, but a statistical
+analisys with hyperparameter sensitivity will be performed in order to assess the impact of these
+choices. It is important to say that, for this work, some parameters of the encoder layer were kept fixed
+in all tests, with dropout being fixed in 10\% and feedforward dimension in 12.
 
-\begin{table}[htbp]
-\caption{Scikit-learn regressors used for the system identification}
-\begin{center}
-\begin{tabular}{|c|c|}
-\hline
-\textbf{Method}&{\textbf{sklearn regressor}} \\
-\hline
-LinReg & LinearRegression  \\
-\hline
-PolyReg & PolynomialFeatures + LinearRegression   \\
-\hline
-MLP & MLPRegressor  \\
-\hline
-\end{tabular}
-\label{regressors}
-\end{center}
-\end{table}
+In addition to the tests performed considering only data from the reference well, one base case
+will also be trained using all the other wells' data in the dataset. In this case, the benchmark
+well will only be used as test for the final model. This test aims to evaluate the possibility to apply
+transfer learning in this dataset, which can be interesting considering a scenario of
+multiple wells in a single reservoir (like it is in Volve). For this test, the base case will
+be modified to have 4 encoder alyers, since we have more data to train the model.
 
-The third regressor used was a Neural Network built using the sklearn multi-layer perceptron (MLP) regressor and was chosen in order to compare the performance of a neural network with more classical approaches. Since the considered regressors all have hyperparameters that have to be chosen, a randomized search approach with cross-validation was adopted. This approach is also very useful because the cross-validation allows for the extraction of some statistical data regarding the impact of the train data on the model. For this work, a cross-validation with 5 folds and 10 iterations was used on the randomized search, that performed 100 iterations. 
+\subsection{Error metrics}
 
-In order to select the best lag orders, the randomized search was performed on different input matrices, built with different lag configurations. Accounting that free-run simulation is generally more useful for long term predictions, the best model selection was made based on the best R$^2$ score for the train data using the free-run simulation results. This metric is defined on equation \ref{r2_eq}, where $\mathbf{\hat{y}}$ represents a prediction vector and $\bar{y}$ represents the average value of the real output vector $\mathbf{y}$.
+The main metric chose to compare the models in this work is the $R^2$ score, showed in equation \ref{eq:r2_eq}
 
-% \begin{figure}[htbp]
-% \centerline{\includegraphics[width=3.5in]{graphical_abstract_2.png}}
-% \caption{Main steps of the workflow}
-% \label{graphical_abstract_2}
-% \end{figure}
-
-
-\begin{equation}\label{r2_eq}
-    R^2 = 1 - \frac{\sum_{i=1}^N{(y_i - \hat{y}_i})^2}{\sum_{i=1}^N{(y_i - \bar{y})^2}}
+\begin{equation}\label{eq:r2_eq}
+    R^2 = 1 - \frac{\sum_{i=1}^N{(y_i - \hat{y}_i})^2}{\sum_{i=1}^N{(y_i - \bar{y})^2}}\,.
 \end{equation}
 
-Other metrics that will be used to compare the results are the root mean squared error (RMSE), defined on equation \ref{rmse_eq}. 
+The main advantage of this metric is the fact that it is esencially adimensional and
+insensitive to bias and scale errors in the whole timeseries, indicating mainly if the prediction
+is able to correctly follow the dynamic of the original data.
+
+Other metrics that will be used to compare the results are the root mean squared error (RMSE), 
+defined on equation \ref{eq:rmse_eq} 
 
 %and the residuals auto-correlation defined on equation \ref{autocorr_eq}. The residuals ($\xi$) are defined as de deviation between real values and predicted values and, for a situation where they are purely random, it is expected that their auto-correlation is equal to the Kronecker's delta.
 
-\begin{equation}\label{rmse_eq}
-    RMSE = \sqrt{\frac{1}{N}\sum_{i=1}^N{(y_i - \hat{y}_i})^2}
+\begin{equation}\label{eq:rmse_eq}
+    RMSE = \sqrt{\frac{1}{N}\sum_{i=1}^N{(y_i - \hat{y}_i})^2}\,.
 \end{equation}
 
-%\begin{equation}\label{autocorr_eq}
-%    \varphi_{\xi\xi} = \frac{\sum_{i=1}^{N-\tau}{(\xi_i - \bar{\xi})(\xi_{i + \tau} - \bar{\xi})}}{\sum_{i=1}^{N}{(\xi_i - \bar{\xi})}^2} = \delta(\tau)
-%\end{equation}
+This metric puts the error in perspective with the scale of data, allowing the comparison
+of the error metric with the data values in the dataset, but is necessary to ensure that, in case of comparison,
+that both metrics were on the same scale.
+
+One important factor to consider when working with time series forecast is that two types
+of predictions are possible. The \textbf{O}ne-\textbf{S}tep \textbf{A}head (OSA) consists in using
+real data (form the dataset) from previous timesteps in order to infer ine future timestep. This 
+prediction is the one whose error metrics we minimize while performing the training.
+The othe is the \textbf{F}ree-run \textbf{S}imulation (FS), which uses only an initial data window
+and starts forecasting future timesteps using previous predicitions as starting points. This
+prediction tends to be less accurathe than the OSA due to error acumulation, but is far more useful
+for engineering purposes since it allows the simulation of long time periods. In this work, the model
+ranking will be mostly based in the $R^2$ score for FS simulations.
 
 
-\section{Results and discussion}\label{section_results}
+\section{Results and discussion}\label{sec:section_results}
 
-%\color{red}
-%Iniciar a secao com uma breve discussao do que sera mostrado
-%
-%Incluir figuras e tabelas que suportam as discussoes
-%
-%Analisar figuras/tabelas, discuti-las
-%
-%Apontar conclusoes gerais, quais sao os melhores models, melhoria obtida pela adocao do metodo proposto, etc, fatos que enaltecam a originalidade do trabalho  
-%\color{black}
+In this section, the results of the tests performed will be presented, just like the main comparison between the transformer
+results and the system identification models.
 
-In this section will be presented the results obtained for the best models selected by using the approach proposed on section \ref{section_method} with the three estimators listed on table \ref{regressors}. All models were tested with the SISO and MISO input spaces described in \ref{section_method} and in both cases, a randomized search was performed in order to select the best hyperparameters. On the randomized search performed for the LinReg and PolyReg model, the only parameter adjusted was the 'positive' parameter from the sklearn LinearRegressor API \cite{sklearn_manual}. For the MLP model, the parameters tested by the randomized search, their sklear API name, ranges and statistical distributions (if applicable) are shown in table \ref{mlp_rdmsearch}. The best hyperparameters found for each estimator will also be presented in this section. For all the models, lag orders from 2 to 20 were tested, with the best order being presented with the results.
+\subsection{General comparison}
 
-\begin{table}[htbp]
-\caption{Parameters used for Randomized Search of the MLPRegressor}
-\begin{center}
-\begin{tabular}{|c|c|c|c|}
-\hline
-\textbf{Parameter}&{\textbf{sklearn name}} &{\textbf{ values or range}}&{\textbf{distribution}}  \\
-\hline
-regularization              & alpha                               & [1e-4, 1e0]       & loguniform \\
-\hline
-activation                  & activation                          & ['relu']          & - \\
-function&&&\\
-\hline
-early                       & early\_stopping                     & ['True', 'False'] & - \\
-stopping flag&&&\\
-\hline
-tolerance                   & tol                                 & [1e-7, 1e-1]      & loguniform \\
-\hline
-hidden layers               & hidden\_layer & [1, 2, 3, 4]      & -  \\
-&\_sizes$^{\mathrm{a}}$&&\\
-\hline
-hidden units$^{\mathrm{b}}$ & hidden\_layer & [20, 40, 60,      & -  \\
-&\_sizes$^{\mathrm{a}}$&80, 100]&\\
-\hline
-batch size                  & batch\_size                         & [16, 32, 64,      & -  \\
-&& 128, 256]&\\
-\hline
-solver                      & solver                              & ['adam']          & -  \\
-\hline
-maximum                     & max\_iter                           & [10000]           & -  \\
-iterations&&&\\
-\hline
-\multicolumn{4}{l}{$^{\mathrm{a}}$Due to sklearn API, this parameter contemplates both the number of} \\
-\multicolumn{4}{l}{hidden units and layers. See more on \cite{sklearn_manual}.}\\
-\multicolumn{4}{l}{$^{\mathrm{b}}$Value for one individual layer. Different layers could have different} \\
-\multicolumn{4}{l}{values.}
-\end{tabular}
-\label{mlp_rdmsearch}
-\end{center}
-\end{table}
-
-The results will be shown as free-run simulations (FS) for each regressor considered. For each estimator, the FS results for MISO and SISO inputs will be compared with the real data in order to qualitatively display the adherence of the models to the problem they aim to represent. A comparison between the R$^2$ score and the RMSE for the free-run and the one-step ahead (OSA) simulations will also be presented both for the train set and for the total time series, allowing for a more quantitative comparison of the models. The final models will be ranked according to their R$^2$ results for the total data. The cross-validation results for the mean fit time of the final models and the dispersion of the R$^2$ score will also be presented and discussed in this results section.
-
-Figure \ref{final_results} shows the main results obtained for the three estimators considered in this study for the MISO and SISO input set, while table \ref{main_results} shows the main regression scores, mean fit time for each final estimator and a rank of the best combinations of estimator and input space based do the R$^2$ metric for the full time series prediction. As a general comment it is important to notice that, to some extent, all the three models were able to represent the shut-in and reopening behaviour of the well on SISO and MISO approaches during a free-run simulation. It is also clear that, in both cases, the MLP estimator outperforms the more classical methods, having better results on R$^2$ and RMSE metrics for the MISO and SISO approaches in all the cases presented in table \ref{main_results}.
-
-\begin{figure*}[htbp]
-\centering
-\subfloat[LinReg results comparison]{\includegraphics[width=6in]{images/LinReg_comparison_big.png}\label{linreg_comp}}
-\hfil
-%\subfloat[LinReg residuals auto-correlation comparison]{\includegraphics[width=3in]%{images/LinReg_correlation.png}\label{linreg_corr}}
-%\hfil
-\subfloat[PolyReg results comparison]{\includegraphics[width=6in]{images/PolyReg_comparison_big.png}\label{polyreg_comp}}
-\hfil
-%\subfloat[PolyReg residuals auto-correlation]{\includegraphics[width=3in]{images/PolyReg_correlation.png}\label{polyreg_corr}}
-%\hfil
-\subfloat[MLP results comparison]{\includegraphics[width=6in]{images/MLP_comparison_big.png}\label{mlp_comp}}
-\hfil
-%\subfloat[MLP residuals auto-correlation]{\includegraphics[width=3in]{images/MLP_correlation.png}\label{mlp_corr}}
-%\hfil
-\caption{Results achieved with the evaluated models}
-\label{final_results}
-\end{figure*}
+Table \ref{tab:main_results} shows the main comparison results between the models. it is possible to see that the transformer architecture ouperforms
+all the evaluated alternatives considering both the $R^2$ and the $RMSE$ for the Free-run Simulation. This is considered the most important case
+since it better displays the extrapolation capabilities of the model, while good performance on the One-step Ahead simulation may be an indicative of
+overfitting. In fact, it is interesting to notice that considering the metrics for the OSA simulation, the transformer model loses for nearly all the
+alternatives in the $RMSE$ comparison ant to the KNN model in the $R^2$ comparison.
 
 \begin{table*}[htbp]
 \caption{Metrics results for realized tests}
 \begin{center}
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
 \hline
-\textbf{Method,}&\textbf{Best}&\multicolumn{4}{|c|}{\textbf{Train data}}&\multicolumn{4}{|c|}{\textbf{Total data}}&\textbf{Rank} \\
-\cline{3-10} 
-\textbf{Inputs} & \textbf{lag} & \textbf{\textit{R$^{\mathrm{2}}$ OSA}}& \textbf{\textit{R$^{\mathrm{2}}$ FS}}& \textbf{\textit{RMSE OSA}}& \textbf{\textit{RMSE FS}}& \textbf{\textit{R$^{\mathrm{2}}$ OSA}}& \textbf{\textit{R$^{\mathrm{2}}$ FS}} & \textbf{\textit{RMSE OSA}}& \textbf{\textit{RMSE FS}}& \\
+\textbf{Method,}&\textbf{Model}& \textbf{Regression} &\multicolumn{4}{c|}{\textbf{Total data}}&\textbf{Rank} \\
+\cline{4-7} 
+\textbf{Inputs} & \textbf{memory}& \textbf{Parameters} &\textbf{\textit{R$^{\mathrm{2}}$ OSA}}& \textbf{\textit{R$^{\mathrm{2}}$ FS}} & \textbf{\textit{RMSE OSA}}& \textbf{\textit{RMSE FS}}& \\
 \hline
+ARX                                  &  4 &   24 & 0.585 & 0.592 & 0.124 & 0.175&5\\
 \hline
-ARX          &  4 & 0.803 & 0.795 & 0.117 & 0.170 & 0.585 & 0.592 & 0.124 & 0.175&4\\
-%MISO    &&&&&&&&& \\
+NARX                                 &  5 &  496 & 0.655 & 0.662 & 0.119 & 0.159&4\\
 \hline
-NARX         &  5 & 0.821 & 0.810 & 0.112 & 0.155 & 0.655 & 0.662 & 0.119 & 0.159&2\\
-%MISO    &&&&&&&&& \\
+KNN                                  & 20 &    0 & 0.892 & 0.676 & 0.090 & 0.156&3\\
 \hline
-MLP          &  6 & 0.898 & 0.852 & 0.084 & 0.139 & 0.723 & 0.688 & 0.105 & 0.153&1\\
+MLP                                  &  6 & 3281 & 0.723 & 0.688 & 0.105 & 0.153&2\\
 \hline
-Transformer  &  6 & 0.898 & 0.852 & 0.084 & 0.139 & 0.723 & 0.688 & 0.105 & 0.153&1\\
-%MISO    &&&&&&&&& \\
+\textbf{Transformer (current work)}  & 16 & 1069 & 0.773 & 0.699 & 0.132$^\mathrm{a}$ & 0.152$^\mathrm{a}$ &1\\
 \hline
+\multicolumn{7}{l}{$^{\mathrm{a}}$Values corrected considering the different normalizations used in each study} \\
 \end{tabular}
-\label{main_results}
+\label{tab:main_results}
 \end{center}
 \end{table*}
 
-Another general comment that can be made by these results is that, as a general rule, the MISO approach, with the addition of information of the pressure and temperature sensors considerably improves the results of the error metrics, specially for the free-run simulations. In fact, by comparing the RMSE for the free-run simulations we can see reductions of the error as great as 5\% of the peak flow rate when adopting the MISO approach. This conclusion somehow agrees with the results presented by Li et al. in \cite{Li2019}, where to some extent cases with more input variables showed better error metrics even though it was not the case with the most extensive input space. It is also interesting to notice that this improvement is more significant on the more classical models (LinReg and PolyReg) than on the MLP case, indicating that the SISO approach using the MLP regressor shows good results to the point that it almost matches or outperforms the LinReg and PolyReg model on the MISO approach, being the third best model. This is a great advantage of the MLP model since it can obtain good results using only the choke size, the control variable effectively used to control the well production, as an input variable, making the model built using this regressor more robust to the loss of pressure and temperature sensors.
+Another interesting comparison that can be made is the comparison between the MLP model and the transformer model regarding the number of
+regression parameters. Here, it is possible to see that the transformer architecture can better represent the time series dynamics even possessing
+less parameters, which serves as an indicative that the architecture is better suited for time series forecasting than the combination of The
+system identification approach and a simple fully-connected neural network. Figure \ref{fig:prediction_results} also displays the 
+results of the OSA and FS simulations for the transformers model compared with the reference time series, where it is possible to see that
+most of the dynamic of the well is captured by the proposed black-box model.
 
-Analyzing the results for the LinReg and PolyReg models it is also interesting to notice that these two models do not show any differences for the SISO case, indicating that the importance of polynomial terms when the input space is essentially the choke opening and its lags is almost null. A stronger evidence of this behaviour is shown in table \ref{main_results}, where we can see that for the SISO approach, the LinReg and PolyReg obtained the same error metrics and the same optimal lag order, indicating that they converged for the same model. It is also interesting to notice by comparing these two models with the MLP model for the SISO case that the optimal lag order that they converged to was considerably lower than the one of the MLP model, which is another evidence of the poor performance of these models on the SISO approach since they lacked the ability of incorporating more data from the time series in order to improve their results.
+\begin{figure*}[htbp]
+    \centerline{\includegraphics[width=6.0in]{images/prediction_best_model.pdf}}
+    \caption{Prediction results for the base transformer case}
+    \label{fig:prediction_results}
+\end{figure*}
 
-Still looking on the fit time shown in table \ref{main_results}, it is important to notice that the MLP model has a significantly greater computational cost than the other models analyzed, with mean fit times at least 10 times greater than the other models. This is an important trade-off to have in mind since, depending on the amount of history data to fit and the number and range of hyperparameters to tune, it can have a considerable impact on the time demanded to build the model. In that aspect, te PolyReg model with MISO inputs is an interesting option to have in mind if computational time is an issue once it has relatively similar performance to the MLP model on the metrics, but a considerably lower fit time.
-
-Analyzing now the randomized search and cross validation results, table \ref{mlp_results} shows the best hyperparameters found for the MLP regressor on the SISO and MISO cases. For the other models, the only parameter varied was the 'positive' parameter of the LinearRegressor, that showed the best results when set to True. It is interesting to notice that the MISO approach allows a significant reduction on the number of hidden units for the best model. It is also interesting to notice that the addition of more input data causes a reduction of the best lag from 17 on the SISO model to 6 on the MISO model. This change allows the reduction of the number of parameters of the MLP model from aroud 15000 on the SISO case for around 3000 on the MISO case, which also reflects on the mean fit time for the MLP model, as displayed on table \ref{main_results}.
-
-\begin{table}[htbp]
-\caption{Best parameters for MLP Randomized Search}
-\begin{center}
-\begin{tabular}{|c|c|c|}
-\hline
-\textbf{Parameter}&\multicolumn{2}{|c|}{\textbf{Value}} \\
-\cline{2-3} 
-\textbf{} & \textbf{\textit{SISO}} & \textbf{\textit{MISO}} \\
-\hline
-alpha                &           1.2e-3 &           1.4e-3  \\
-\hline
-batch\_size          &               64 &              128  \\
-\hline
-early\_stopping      &             True &            False  \\
-\hline
-hidden\_layer\_sizes & [80, 80, 60, 20] & [20, 40, 20, 40]  \\
-\hline
-tol                  &           1.4e-3 &           5.6e-6  \\
-\hline
-\end{tabular}
-\label{mlp_results}
-\end{center}
-\end{table}
-
-
-%\begin{table}[htbp]
-%\caption{Mean fit time for the models evaluated}
-%\begin{center}
-%\begin{tabular}{|c|c|c|}
-%\hline
-%\textbf{Parameter}&\multicolumn{2}{|c|}{\textbf{Time (seconds)}} \\
-%\cline{2-3} 
-%\textbf{} & \textbf{\textit{SISO}} & \textbf{\textit{MISO}} \\
-%\hline
-%LinReg                &          1.09e-3 &            1.32e-3\\
-%\hline
-%PolyReg               &          1.53e-3 &            3.64e-2\\
-%\hline
-%MLP                   &          4.80e-1 &            3.67e-1\\
-%\hline
-%\end{tabular}
-%\label{time_results}
-%\end{center}
-%\end{table}
-
-Another important factor to consider while selecting a model is the model sensitivity to the input data. This can be evaluated by comparing the R$^2$ score of another metric of choice of the models when fitted with different input spaces during cross-validation. These results are shown on the figure \ref{cv_stats}, where a boxplot of the R$^2$ results for the validation folds is shown. Once again, it is clear that the MLP is a more adequate method since the dispersion of the metric is lower for all the cross-validation fits performed. This indicates that the MLP model is less sensitive to the selection of an specific train set. It is also interesting to notice that the use of MISO inputs reduces the dispersion of the data, indicating that the addition of more sensor data also helps the model to be less sensitive to the train set.
+It is also important to notice the importance of the early stopping implemented on the training of the transformer model. Figure \ref{fig:error_convergence} shows
+the evolution of the loss function ($MSE$) as the epochs progress. It is already possible to see the start of the overfitting tendency in the graphic for the given 
+model training, which could degrade the results if eraly stopping was not used.
 
 \begin{figure}[htbp]
-\centerline{\includegraphics[width=3.5in]{images/boxplot_cv.png}}
-\caption{Boxplot comparison of the R$^2$ metric for the three models evaluated during cross-validation}
-\label{cv_stats}
+    \centerline{\includegraphics[width=0.49\textwidth]{images/error_convergence.pdf}}
+    \caption{Prediction results for the base transformer case}
+    \label{fig:error_convergence}
 \end{figure}
 
-\section{Conclusion}\label{section_conclusion}
+\subsection{Statistical analysis}
 
-%\color{red}
-%retomar brevemente as discussoes feitas na secao 4
-%apontar trabalhos futuros
-%\color{black}
+In order to perform some statistical analysis of the transformer model, variations of the proposed transformer were fit multiple times. In each variation, the number of
+of encoder layers, the number of fully-connected layers after the transformer and the memory size were altered in order to investigate the impact of these hyperparameters
+in the model overall result. Each variatin of the model was fitted 10 times in order to increase the size of the results sample. 
 
-This work applied a system identification approach to create a black box model of a production oil well. In search for the best model, this work built a python class capable of using any sklearn-compatible regressor in order to perform the system identification and chose the best model by following a grid search approach for lag order selection and a randomized search approach for hyperparameter selection on the regressor. This approach was tested with both single input (SISO) and multiple input (MISO).
+Figure \ref{fig:boxplot_results} displays the boxplot for the considered error metrics in OSA and FS simulations.
+Focusing on the FS case, it is possible to notice that both memory and encoder layers have little impact in the mean value
+of the metrics with just a slight tendency of improvement for higher values of memory. It is also possible to notice that, 
+for cases with more encoder layers, there is a tendency of appearance
+of more outliers than in cases with less layers. That is probably due to the small dataset used to train the transformer in this case,
+which for cases with large quantities of parameters may not be enough to fit properly the model.
 
-From the three models tested in this work, it was possible to conclude that the Neural Network (MLP) model outperformed the ARX (LinReg) and NARX (PolyReg) models implemented in all metrics evaluated. Its performance was also superior regarding the dispersion of the R$^2$ score during cross-validation for both SISO and MISO approaches. The model also achieved similar performances to the other models on the MISO approach by using just the SISO approach, which indicates great prediction capability using only the active control variable available on the system.
+\begin{figure*}[htbp]
+    \centering
+    \subfloat[$R^2$ boxplot]{\includegraphics[width=6in]{images/boxplot_MEMORY_R2_ENCODER LAYERS.pdf}\label{fig:box_r2}}
+    \hfil
+    \subfloat[$RMSE$ boxplot]{\includegraphics[width=6in]{images/boxplot_MEMORY_RMSE_ENCODER LAYERS.pdf}\label{fig:box_rmse}}
+    \hfil
+    \caption{Statistical analisys of the impact of memory and number of encoder layers in the results of the model}
+    \label{fig:boxplot_results}
+\end{figure*}
 
-The only downside found of the MLP model was its superior computational cost when compared with the other models, but for this case the PolyReg model with MISO approach could be a viable alternative, even though its performance is not as good as the MLP model according to the metrics adopted.
+Figure \ref{fig:statistical_results} represents the mean result from all the runs performed together
+with its error bar (here, quantified by the standard deviation of the series) for both all the tested models
+and the 10 runs of the reference model only. It is possible to see that for the OSA prediction, as expected,
+there is good agerrment and low dispersion in the final responses, while for the FS simulation, the dispersion
+is considerably larger. It is also possible to notice that the base case is indeed better, in hte mean, to
+predict the results than the average of all the models.
 
-For future works, it is proposed to apply the same methodology to other sklearn regressors or more robust neural network architectures and frameworks, such as tensorflow or pytorch-implemented deep learning models, try the same methodology on other wells form the Volve dataset, on other datasets available or on the same well with additional information from other wells on the same reservoir, in order tho get possible interference effects between nearby wells. The application of Wiener-based estimators or spectral decomposition for this data is also part of possible future works.
+\begin{figure*}[htbp]
+    \centering
+    \subfloat[All runs]{\includegraphics[width=6in]{images/prediction_errorbars.pdf}\label{fig:dispersion_all}}
+    \hfil
+    \subfloat[Base case runs (memory = 16, encoder layers = 1, linear layers = 0)]{\includegraphics[width=6in]{images/prediction_errorbars_basemodel.pdf}\label{fig:dispersion_base}}
+    \hfil
+    \caption{Statistical analisys of the impact of memory and number of encoder layers in the results of the model}
+    \label{fig:statistical_results}
+\end{figure*}
+
+\subsection{Transfer Learning Tests}
+
+In this section, data from the other production wells in the Volve dataset is used to
+train our transformer model while the prediction is applied on our benchmark well. 
+It is important to emphasize that, in this case, data from the evaluated well is not
+seen during the training of the neural network, being used only for test.
+Since considering all the wells our dataset gets considerably bigger, for this case a variation
+of the base case previously used with 4 encoder layers was adjusted. Figure \ref{fig:tl_prediction_results}
+shows the results of the analisys. It is possible to conclude that, while de adopted approach
+allowed for good OSA results, predictions done using FS were not as good, being unable to
+represent adequately the dynamic of the well.
+
+\begin{figure*}[htbp]
+    \centerline{\includegraphics[width=6.0in]{images/multi_best_model.pdf}}
+    \caption{Prediction results for the base transformer transfer learning case}
+    \label{fig:tl_prediction_results}
+\end{figure*}
+
+
+\section{Conclusion}\label{sec:section_conclusion}
+
+In this work a transformer model was used to create a black-box model for production
+forecasting of a well. Statistical analysis of the model was performed together with
+with some hyperparameter sensitivities and one simple transfer learning test was performed.
+
+The results obtained indicated that the base model adjusted outperformed the alternatives 
+evaluated in metrics for the FS predictions. Comparing with the other neural network model
+used as comparison, the transformer architectured showed better performance with less parameters,
+indicating that the architecture should be moer adequate to time series forecasting.
+
+The statistical analysis and hyperparameter sensitivity showed that the error metrics were less
+sensitive to the memory size and number of encoder layers, but models with more encoder
+layers showed more outlier results with poor performance, probably due to the relatively small size of the
+time series (around 700 points). Comparing the mean predictions for the base case with the mean
+predictions for the whole sensitivity analisys, it is possible to conclude thar, while the
+base case seems to, on average, represent better the well dynamics in FS cases, the error bar for both
+cases is very similar considering the standard deviation as a metric.
+
+Finally, a version of the base case with more encoder layers was adjusted using the other wells
+as training set in order to perform a transfer leraning test. Results show that, while the generated model
+can adequately predict the dynamic of the benchmark well in OSA cases, it lacked the extrapolation
+capability needed to perform well in FS cases, with further tests and studies to improve this result
+being needed.
+
+As a non-exhaustive list of future works following the current paper, it is possible to cite:
+
+\begin{itemize}
+    \item Improve the variance of the model, reducing the dispersion
+    \item Improve architecture in order to viabilize the transfer learning strategy \
+     for Free-run simulations
+    \item Work with dimensional data, eliminating the normalization timestep
+    \item Include other similar benchmark datasets in the pipeline, such as the SPE Dataset
+\end{itemize}
+
 
 
 % trigger a \newpage just before the given reference

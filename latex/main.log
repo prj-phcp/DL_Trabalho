@@ -1,12 +1,12 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2023.3.14)  28 JUN 2023 14:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2023.1.3)  2 JUL 2023 21:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/c5ef-linux/github/DL_Trabalho/latex/main.tex
-(/home/c5ef-linux/github/DL_Trabalho/latex/main.tex
+**"/mnt/d/OneDrive/Mestrado/Semestre 03/DEEPLEARN/DL_Trabalho/latex/main.tex"
+(/mnt/d/OneDrive/Mestrado/Semestre 03/DEEPLEARN/DL_Trabalho/latex/main.tex
 LaTeX2e <2020-02-02> patch level 2
-L3 programming layer <2020-02-14> (/home/c5ef-linux/github/DL_Trabalho/latex/IEEEtran.cls
+L3 programming layer <2020-02-14> (/mnt/d/OneDrive/Mestrado/Semestre 03/DEEPLEARN/DL_Trabalho/latex/IEEEtran.cls
 Document Class: IEEEtran 2015/08/26 V1.8b by Michael Shell
 -- See the "IEEEtran_HOWTO" manual for usage information.
 -- http://www.michaelshell.org/tex/ieeetran/
@@ -259,7 +259,7 @@ Package caption Info: \@makecaption = \long macro:#1#2->\ifx \@captype \@IEEEtab
 File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
 \l__kernel_color_stack_int=\count271
 \l__pdf_internal_box=\box51
-) (/home/c5ef-linux/github/DL_Trabalho/latex/main.aux)
+) (/mnt/d/OneDrive/Mestrado/Semestre 03/DEEPLEARN/DL_Trabalho/latex/main.aux)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
@@ -300,59 +300,92 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: End \AtBeginDocument code.
+LaTeX Font Info:    Calculating math sizes for size <11> on input line 42.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 42.
+ (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 42.
+ (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
 <images/wellScheme.png, id=1, 457.10776pt x 443.85825pt>
 File: images/wellScheme.png Graphic file (type png)
 <use images/wellScheme.png>
-Package pdftex.def Info: images/wellScheme.png  used on input line 93.
+Package pdftex.def Info: images/wellScheme.png  used on input line 114.
 (pdftex.def)             Requested size: 216.81pt x 210.53008pt.
  [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
-] [2 </home/c5ef-linux/github/DL_Trabalho/latex/images/wellScheme.PNG>]
-LaTeX Font Info:    Trying to load font information for U+msa on input line 190.
- (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Trying to load font information for U+msb on input line 190.
- (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-<images/data_example_2.png, id=15, 866.23625pt x 1637.11626pt>
+] [2 </mnt/d/OneDrive/Mestrado/Semestre 03/DEEPLEARN/DL_Trabalho/latex/images/wellScheme.png>]
+<images/data_example_2.png, id=16, 866.23625pt x 1637.11626pt>
 File: images/data_example_2.png Graphic file (type png)
 <use images/data_example_2.png>
-Package pdftex.def Info: images/data_example_2.png  used on input line 269.
+Package pdftex.def Info: images/data_example_2.png  used on input line 287.
 (pdftex.def)             Requested size: 252.94499pt x 478.04897pt.
-
-Underfull \vbox (badness 1122) has occurred while \output is active []
-
  [3]
-<images/graphical_abstract.png, id=26, 942.4008pt x 372.4314pt>
-File: images/graphical_abstract.png Graphic file (type png)
-<use images/graphical_abstract.png>
-Package pdftex.def Info: images/graphical_abstract.png  used on input line 326.
-(pdftex.def)             Requested size: 433.62pt x 171.36598pt.
- [4 </home/c5ef-linux/github/DL_Trabalho/latex/images/data_example_2.png>] [5 </home/c5ef-linux/github/DL_Trabalho/latex/images/graphical_abstract.png>]
-<images/LinReg_comparison_big.png, id=38, 1635.10875pt x 633.36626pt>
-File: images/LinReg_comparison_big.png Graphic file (type png)
-<use images/LinReg_comparison_big.png>
-Package pdftex.def Info: images/LinReg_comparison_big.png  used on input line 439.
-(pdftex.def)             Requested size: 433.62pt x 167.95723pt.
-<images/PolyReg_comparison_big.png, id=39, 1635.10875pt x 633.36626pt>
-File: images/PolyReg_comparison_big.png Graphic file (type png)
-<use images/PolyReg_comparison_big.png>
-Package pdftex.def Info: images/PolyReg_comparison_big.png  used on input line 443.
-(pdftex.def)             Requested size: 433.62pt x 167.95723pt.
-<images/MLP_comparison_big.png, id=40, 1635.10875pt x 633.36626pt>
-File: images/MLP_comparison_big.png Graphic file (type png)
-<use images/MLP_comparison_big.png>
-Package pdftex.def Info: images/MLP_comparison_big.png  used on input line 447.
-(pdftex.def)             Requested size: 433.62pt x 167.95723pt.
-<images/boxplot_cv.png, id=41, 624.3325pt x 449.68pt>
-File: images/boxplot_cv.png Graphic file (type png)
-<use images/boxplot_cv.png>
-Package pdftex.def Info: images/boxplot_cv.png  used on input line 537.
-(pdftex.def)             Requested size: 252.94499pt x 182.18115pt.
- [6] [7 </home/c5ef-linux/github/DL_Trabalho/latex/images/LinReg_comparison_big.png> </home/c5ef-linux/github/DL_Trabalho/latex/images/PolyReg_comparison_big.png> </home/c5ef-linux/github/DL_Trabalho/latex/images/MLP_comparison_big.png>] (/home/c5ef-linux/github/DL_Trabalho/latex/main.bbl [8 </home/c5ef-linux/github/DL_Trabalho/latex/images/boxplot_cv.png>])
+<images/transformer_architecture.png, id=29, 676.272pt x 469.098pt>
+File: images/transformer_architecture.png Graphic file (type png)
+<use images/transformer_architecture.png>
+Package pdftex.def Info: images/transformer_architecture.png  used on input line 351.
+(pdftex.def)             Requested size: 247.6778pt x 171.8027pt.
+ [4 </mnt/d/OneDrive/Mestrado/Semestre 03/DEEPLEARN/DL_Trabalho/latex/images/data_example_2.png> </mnt/d/OneDrive/Mestrado/Semestre 03/DEEPLEARN/DL_Trabalho/latex/images/transformer_architecture.png>]
+<images/graphical_abstract_transformers.png, id=34, 612.543pt x 542.025pt>
+File: images/graphical_abstract_transformers.png Graphic file (type png)
+<use images/graphical_abstract_transformers.png>
+Package pdftex.def Info: images/graphical_abstract_transformers.png  used on input line 419.
+(pdftex.def)             Requested size: 433.62pt x 383.69908pt.
+ [5]
+<images/prediction_best_model.pdf, id=38, 867.24pt x 361.35pt>
+File: images/prediction_best_model.pdf Graphic file (type pdf)
+<use images/prediction_best_model.pdf>
+Package pdftex.def Info: images/prediction_best_model.pdf  used on input line 522.
+(pdftex.def)             Requested size: 433.62pt x 180.67456pt.
+<images/error_convergence.pdf, id=39, 462.52798pt x 346.89601pt>
+File: images/error_convergence.pdf Graphic file (type pdf)
+<use images/error_convergence.pdf>
+Package pdftex.def Info: images/error_convergence.pdf  used on input line 532.
+(pdftex.def)             Requested size: 252.84283pt x 189.63417pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+<images/boxplot_MEMORY_R2_ENCODER LAYERS.pdf, id=40, 867.24pt x 361.35pt>
+File: images/boxplot_MEMORY_R2_ENCODER LAYERS.pdf Graphic file (type pdf)
+<use images/boxplot_MEMORY_R2_ENCODER LAYERS.pdf>
+Package pdftex.def Info: images/boxplot_MEMORY_R2_ENCODER LAYERS.pdf  used on input line 552.
+(pdftex.def)             Requested size: 433.62pt x 180.67456pt.
+<images/boxplot_MEMORY_RMSE_ENCODER LAYERS.pdf, id=41, 867.24pt x 361.35pt>
+File: images/boxplot_MEMORY_RMSE_ENCODER LAYERS.pdf Graphic file (type pdf)
+<use images/boxplot_MEMORY_RMSE_ENCODER LAYERS.pdf>
+Package pdftex.def Info: images/boxplot_MEMORY_RMSE_ENCODER LAYERS.pdf  used on input line 554.
+(pdftex.def)             Requested size: 433.62pt x 180.67456pt.
+ [6 </mnt/d/OneDrive/Mestrado/Semestre 03/DEEPLEARN/DL_Trabalho/latex/images/graphical_abstract_transformers.png>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+<images/prediction_errorbars.pdf, id=46, 867.24pt x 361.35pt>
+File: images/prediction_errorbars.pdf Graphic file (type pdf)
+<use images/prediction_errorbars.pdf>
+Package pdftex.def Info: images/prediction_errorbars.pdf  used on input line 569.
+(pdftex.def)             Requested size: 433.62pt x 180.67456pt.
+<images/prediction_errorbars_basemodel.pdf, id=47, 867.24pt x 361.35pt>
+File: images/prediction_errorbars_basemodel.pdf Graphic file (type pdf)
+<use images/prediction_errorbars_basemodel.pdf>
+Package pdftex.def Info: images/prediction_errorbars_basemodel.pdf  used on input line 571.
+(pdftex.def)             Requested size: 433.62pt x 180.67456pt.
+<images/multi_best_model.pdf, id=48, 867.24pt x 361.35pt>
+File: images/multi_best_model.pdf Graphic file (type pdf)
+<use images/multi_best_model.pdf>
+Package pdftex.def Info: images/multi_best_model.pdf  used on input line 590.
+(pdftex.def)             Requested size: 433.62pt x 180.67456pt.
+ [7 </mnt/d/OneDrive/Mestrado/Semestre 03/DEEPLEARN/DL_Trabalho/latex/images/prediction_best_model.pdf> </mnt/d/OneDrive/Mestrado/Semestre 03/DEEPLEARN/DL_Trabalho/latex/images/error_convergence.pdf>]
+Underfull \hbox (badness 2173) in paragraph at lines 607--614
+[]\OT1/ptm/m/n/10 The sta-tis-ti-cal anal-y-sis and hy-per-pa-ram-e-ter sen-si-tiv-ity
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ (/mnt/d/OneDrive/Mestrado/Semestre 03/DEEPLEARN/DL_Trabalho/latex/main.bbl [8 </mnt/d/OneDrive/Mestrado/Semestre 03/DEEPLEARN/DL_Trabalho/latex/images/boxplot_MEMORY_R2_ENCODER LAYERS.pdf> </mnt/d/OneDrive/Mestrado/Semestre 03/DEEPLEARN/DL_Trabalho/latex/images/boxplot_MEMORY_RMSE_ENCODER LAYERS.pdf>] [9 </mnt/d/OneDrive/Mestrado/Semestre 03/DEEPLEARN/DL_Trabalho/latex/images/prediction_errorbars.pdf> </mnt/d/OneDrive/Mestrado/Semestre 03/DEEPLEARN/DL_Trabalho/latex/images/prediction_errorbars_basemodel.pdf> </mnt/d/OneDrive/Mestrado/Semestre 03/DEEPLEARN/DL_Trabalho/latex/images/multi_best_model.pdf>])
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -364,22 +397,22 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[9
+[10
 
-] (/home/c5ef-linux/github/DL_Trabalho/latex/main.aux) ) 
+] (/mnt/d/OneDrive/Mestrado/Semestre 03/DEEPLEARN/DL_Trabalho/latex/main.aux) ) 
 Here is how much of TeX's memory you used:
- 4755 strings out of 481239
- 71772 string characters out of 5920377
- 325396 words of memory out of 5000000
- 19963 multiletter control sequences out of 15000+600000
- 574222 words of font info for 103 fonts, out of 8000000 for 9000
+ 4810 strings out of 481239
+ 74062 string characters out of 5920378
+ 323449 words of memory out of 5000000
+ 20013 multiletter control sequences out of 15000+600000
+ 578642 words of font info for 117 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,11n,49p,1394b,339s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on /home/c5ef-linux/github/DL_Trabalho/latex/main.pdf (9 pages, 1524554 bytes).
+ 41i,11n,49p,594b,348s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on "/mnt/d/OneDrive/Mestrado/Semestre 03/DEEPLEARN/DL_Trabalho/latex/main.pdf" (10 pages, 977758 bytes).
 PDF statistics:
- 101 PDF objects out of 1000 (max. 8388607)
- 66 compressed objects within 1 object stream
+ 423 PDF objects out of 1000 (max. 8388607)
+ 106 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 36 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 56 words of extra memory for PDF output out of 10000 (max. 10000000)
 
